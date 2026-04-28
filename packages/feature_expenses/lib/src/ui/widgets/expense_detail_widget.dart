@@ -1,4 +1,5 @@
 import 'package:core_bloc/core_bloc.dart';
+import 'package:core_l10n/core_l10n.dart';
 import 'package:flutter/material.dart';
 import '../../domain/models/expense.build.dart';
 import '../../domain/models/expense_category.dart';
@@ -10,22 +11,24 @@ class ExpenseDetailWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = S.of(context)!;
+
     return Scaffold(
-      appBar: AppBar(title: const Text('Transaction Details'), elevation: 2),
+      appBar: AppBar(title: Text(l10n.transactionDetails), elevation: 2),
       body: BlocBuilder<ExpenseDetailBloc, ExpenseDetailState>(
         buildWhen: (previous, current) => previous != current,
         builder: (context, state) {
           return state.when(
-            initial: () => const Center(child: Text('No data')),
+            initial: () => Center(child: Text(l10n.noData)),
             loading: () => const Center(child: CircularProgressIndicator()),
             loaded: (expense) => _ExpenseDetailContent(expense: expense),
             error: (message) => Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Error: $message'),
+                  Text(l10n.errorPrefix(message)),
                   const SizedBox(height: 16),
-                  ElevatedButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Go Back')),
+                  ElevatedButton(onPressed: () => Navigator.of(context).pop(), child: Text(l10n.goBack)),
                 ],
               ),
             ),
@@ -43,6 +46,8 @@ class _ExpenseDetailContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = S.of(context)!;
+
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -67,15 +72,15 @@ class _ExpenseDetailContent extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 32),
-          _DetailRow(label: 'Title', value: expense.title),
+          _DetailRow(label: l10n.title, value: expense.title),
           const Divider(),
-          _DetailRow(label: 'Type', value: expense.type.displayName),
+          _DetailRow(label: l10n.type, value: expense.type.displayName),
           const Divider(),
-          _DetailRow(label: 'Category', value: expense.category.displayName),
+          _DetailRow(label: l10n.category, value: expense.category.displayName),
           const Divider(),
-          _DetailRow(label: 'Date', value: _formatDate(expense.date)),
+          _DetailRow(label: l10n.date, value: _formatDate(expense.date)),
           const Divider(),
-          _DetailRow(label: 'Transaction ID', value: expense.id),
+          _DetailRow(label: l10n.transactionId, value: expense.id),
         ],
       ),
     );

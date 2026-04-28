@@ -1,4 +1,5 @@
 import 'package:core_bloc/core_bloc.dart';
+import 'package:core_l10n/core_l10n.dart';
 import 'package:core_navigation/core_navigation.dart';
 import 'package:flutter/material.dart';
 import '../../domain/models/expense.build.dart';
@@ -13,17 +14,18 @@ class ExpenseListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<ExpenseListBloc>();
+    final l10n = S.of(context)!;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Expense Tracker'), elevation: 2),
+      appBar: AppBar(title: Text(l10n.appTitle), elevation: 2),
       body: BlocBuilder<ExpenseListBloc, ExpenseListState>(
         buildWhen: (previous, current) => previous != current,
         builder: (context, state) {
           return state.when(
-            initial: () => const Center(child: Text('No expenses yet')),
+            initial: () => Center(child: Text(l10n.noExpensesYet)),
             loading: () => const Center(child: CircularProgressIndicator()),
             loaded: (expenses) => expenses.isEmpty
-                ? const Center(child: Text('No expenses yet. Add your first expense!'))
+                ? Center(child: Text(l10n.noExpensesYetAddFirst))
                 : ListView.builder(
                     itemCount: expenses.length,
                     itemBuilder: (context, index) {
@@ -60,13 +62,15 @@ class _ErrorView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = S.of(context)!;
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Error: $message'),
+          Text(l10n.errorPrefix(message)),
           const SizedBox(height: 16),
-          ElevatedButton(onPressed: () => bloc.add(const ExpenseListEvent.load()), child: const Text('Retry')),
+          ElevatedButton(onPressed: () => bloc.add(const ExpenseListEvent.load()), child: Text(l10n.retry)),
         ],
       ),
     );

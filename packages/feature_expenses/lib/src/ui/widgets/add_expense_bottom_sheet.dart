@@ -1,4 +1,5 @@
 import 'package:core_bloc/core_bloc.dart';
+import 'package:core_l10n/core_l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 import '../../domain/models/expense.build.dart';
@@ -31,6 +32,8 @@ class _AddExpenseBottomSheetState extends State<AddExpenseBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = S.of(context)!;
+
     return Padding(
       padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom, left: 16, right: 16, top: 16),
       child: Form(
@@ -40,14 +43,14 @@ class _AddExpenseBottomSheetState extends State<AddExpenseBottomSheet> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text('Add Transaction', style: Theme.of(context).textTheme.headlineSmall, textAlign: TextAlign.center),
+              Text(l10n.addTransaction, style: Theme.of(context).textTheme.headlineSmall, textAlign: TextAlign.center),
               const SizedBox(height: 24),
               TextFormField(
                 controller: _titleController,
-                decoration: const InputDecoration(labelText: 'Title', border: OutlineInputBorder()),
+                decoration: InputDecoration(labelText: l10n.title, border: const OutlineInputBorder()),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter a title';
+                    return l10n.pleaseEnterTitle;
                   }
                   return null;
                 },
@@ -55,14 +58,18 @@ class _AddExpenseBottomSheetState extends State<AddExpenseBottomSheet> {
               const SizedBox(height: 16),
               TextFormField(
                 controller: _amountController,
-                decoration: const InputDecoration(labelText: 'Amount', border: OutlineInputBorder(), prefixText: '\$ '),
+                decoration: InputDecoration(
+                  labelText: l10n.amount,
+                  border: const OutlineInputBorder(),
+                  prefixText: '\$ ',
+                ),
                 keyboardType: const TextInputType.numberWithOptions(decimal: true),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter an amount';
+                    return l10n.pleaseEnterAmount;
                   }
                   if (double.tryParse(value) == null) {
-                    return 'Please enter a valid number';
+                    return l10n.pleaseEnterValidNumber;
                   }
                   return null;
                 },
@@ -70,7 +77,7 @@ class _AddExpenseBottomSheetState extends State<AddExpenseBottomSheet> {
               const SizedBox(height: 16),
               DropdownButtonFormField<ExpenseType>(
                 initialValue: _selectedType,
-                decoration: const InputDecoration(labelText: 'Type', border: OutlineInputBorder()),
+                decoration: InputDecoration(labelText: l10n.type, border: const OutlineInputBorder()),
                 items: ExpenseType.values.map((type) {
                   return DropdownMenuItem(value: type, child: Text(type.displayName));
                 }).toList(),
@@ -83,7 +90,7 @@ class _AddExpenseBottomSheetState extends State<AddExpenseBottomSheet> {
               const SizedBox(height: 16),
               DropdownButtonFormField<ExpenseCategory>(
                 initialValue: _selectedCategory,
-                decoration: const InputDecoration(labelText: 'Category', border: OutlineInputBorder()),
+                decoration: InputDecoration(labelText: l10n.category, border: const OutlineInputBorder()),
                 items: ExpenseCategory.values.map((category) {
                   return DropdownMenuItem(value: category, child: Text(category.displayName));
                 }).toList(),
@@ -96,7 +103,7 @@ class _AddExpenseBottomSheetState extends State<AddExpenseBottomSheet> {
               const SizedBox(height: 16),
               ListTile(
                 contentPadding: EdgeInsets.zero,
-                title: const Text('Date'),
+                title: Text(l10n.date),
                 subtitle: Text(_formatDate(_selectedDate)),
                 trailing: const Icon(Icons.calendar_today),
                 onTap: () async {
@@ -114,7 +121,7 @@ class _AddExpenseBottomSheetState extends State<AddExpenseBottomSheet> {
               const SizedBox(height: 24),
               ElevatedButton(
                 onPressed: _onSave,
-                child: const Padding(padding: EdgeInsets.symmetric(vertical: 16), child: Text('Save')),
+                child: Padding(padding: const EdgeInsets.symmetric(vertical: 16), child: Text(l10n.save)),
               ),
               const SizedBox(height: 16),
             ],

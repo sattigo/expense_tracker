@@ -1,0 +1,85 @@
+{
+  "@@locale": "en",
+  "appTitle": "Expense Tracker",
+  "@appTitle": {
+    "description": "Application title shown in app bar"
+  },
+  "noExpensesYet": "No expenses yet",
+  "@noExpensesYet": {
+    "description": "Empty state message when no expenses are available"
+  },
+  "noExpensesYetAddFirst": "No expenses yet. Add your first expense!",
+  "@noExpensesYetAddFirst": {
+    "description": "Empty state message with call to action"
+  },
+  "errorPrefix": "Error: {message}",
+  "@errorPrefix": {
+    "description": "Error message prefix",
+    "placeholders": {
+      "message": {
+        "type": "String",
+        "example": "Failed to load data"
+      }
+    }
+  },
+  "retry": "Retry",
+  "@retry": {
+    "description": "Retry button text"
+  },
+  "addTransaction": "Add Transaction",
+  "@addTransaction": {
+    "description": "Title of add transaction bottom sheet"
+  },
+  "title": "Title",
+  "@title": {
+    "description": "Title field label"
+  },
+  "pleaseEnterTitle": "Please enter a title",
+  "@pleaseEnterTitle": {
+    "description": "Validation message for empty title field"
+  },
+  "amount": "Amount",
+  "@amount": {
+    "description": "Amount field label"
+  },
+  "pleaseEnterAmount": "Please enter an amount",
+  "@pleaseEnterAmount": {
+    "description": "Validation message for empty amount field"
+  },
+  "pleaseEnterValidNumber": "Please enter a valid number",
+  "@pleaseEnterValidNumber": {
+    "description": "Validation message for invalid number"
+  },
+  "type": "Type",
+  "@type": {
+    "description": "Type field label"
+  },
+  "category": "Category",
+  "@category": {
+    "description": "Category field label"
+  },
+  "date": "Date",
+  "@date": {
+    "description": "Date field label"
+  },
+  "save": "Save",
+  "@save": {
+    "description": "Save button text"
+  },
+  "transactionDetails": "Transaction Details",
+  "@transactionDetails": {
+    "description": "Transaction details screen title"
+  },
+  "noData": "No data",
+  "@noData": {
+    "description": "Empty state when no data available"
+  },
+  "goBack": "Go Back",
+  "@goBack": {
+    "description": "Go back button text"
+  },
+  "transactionId": "Transaction ID",
+  "@transactionId": {
+    "description": "Transaction ID field label"
+  }
+}
