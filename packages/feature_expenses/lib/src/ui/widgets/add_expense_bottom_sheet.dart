@@ -1,0 +1,144 @@
+import 'package:core_bloc/core_bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
+import '../../domain/models/expense.build.dart';
+import '../../domain/models/expense_category.dart';
+import '../../domain/models/expense_type.dart';
+import '../bloc/expense_list_bloc.build.dart';
+
+class AddExpenseBottomSheet extends StatefulWidget {
+  const AddExpenseBottomSheet({super.key});
+
+  @override
+  State<AddExpenseBottomSheet> createState() => _AddExpenseBottomSheetState();
+}
+
+class _AddExpenseBottomSheetState extends State<AddExpenseBottomSheet> {
+  final _formKey = GlobalKey<FormState>();
+  final _titleController = TextEditingController();
+  final _amountController = TextEditingController();
+
+  ExpenseCategory _selectedCategory = ExpenseCategory.food;
+  ExpenseType _selectedType = ExpenseType.expense;
+  DateTime _selectedDate = DateTime.now();
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+    _amountController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom, left: 16, right: 16, top: 16),
+      child: Form(
+        key: _formKey,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text('Add Transaction', style: Theme.of(context).textTheme.headlineSmall, textAlign: TextAlign.center),
+              const SizedBox(height: 24),
+              TextFormField(
+                controller: _titleController,
+                decoration: const InputDecoration(labelText: 'Title', border: OutlineInputBorder()),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter a title';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 16),
+              TextFormField(
+                controller: _amountController,
+                decoration: const InputDecoration(labelText: 'Amount', border: OutlineInputBorder(), prefixText: '\$ '),
+                keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter an amount';
+                  }
+                  if (double.tryParse(value) == null) {
+                    return 'Please enter a valid number';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 16),
+              DropdownButtonFormField<ExpenseType>(
+                initialValue: _selectedType,
+                decoration: const InputDecoration(labelText: 'Type', border: OutlineInputBorder()),
+                items: ExpenseType.values.map((type) {
+                  return DropdownMenuItem(value: type, child: Text(type.displayName));
+                }).toList(),
+                onChanged: (value) {
+                  if (value != null) {
+                    setState(() => _selectedType = value);
+                  }
+                },
+              ),
+              const SizedBox(height: 16),
+              DropdownButtonFormField<ExpenseCategory>(
+                initialValue: _selectedCategory,
+                decoration: const InputDecoration(labelText: 'Category', border: OutlineInputBorder()),
+                items: ExpenseCategory.values.map((category) {
+                  return DropdownMenuItem(value: category, child: Text(category.displayName));
+                }).toList(),
+                onChanged: (value) {
+                  if (value != null) {
+                    setState(() => _selectedCategory = value);
+                  }
+                },
+              ),
+              const SizedBox(height: 16),
+              ListTile(
+                contentPadding: EdgeInsets.zero,
+                title: const Text('Date'),
+                subtitle: Text(
+                  '${_selectedDate.day.toString().padLeft(2, '0')}.${_selectedDate.month.toString().padLeft(2, '0')}.${_selectedDate.year}',
+                ),
+                trailing: const Icon(Icons.calendar_today),
+                onTap: () async {
+                  final picked = await showDatePicker(
+                    context: context,
+                    initialDate: _selectedDate,
+                    firstDate: DateTime(2000),
+                    lastDate: DateTime.now(),
+                  );
+                  if (picked != null) {
+                    setState(() => _selectedDate = picked);
+                  }
+                },
+              ),
+              const SizedBox(height: 24),
+              ElevatedButton(
+                onPressed: _onSave,
+                child: const Padding(padding: EdgeInsets.symmetric(vertical: 16), child: Text('Save')),
+              ),
+              const SizedBox(height: 16),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _onSave() {
+    if (_formKey.currentState!.validate()) {
+      final expense = Expense(
+        id: const Uuid().v4(),
+        amount: double.parse(_amountController.text),
+        title: _titleController.text,
+        date: _selectedDate,
+        category: _selectedCategory,
+        type: _selectedType,
+      );
+
+      context.read<ExpenseListBloc>().add(ExpenseListEvent.add(expense));
+      Navigator.of(context).pop();
+    }
+  }
+}
