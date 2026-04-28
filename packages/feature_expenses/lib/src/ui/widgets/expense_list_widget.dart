@@ -29,19 +29,7 @@ class ExpenseListWidget extends StatelessWidget {
                       return _ExpenseListItem(expense: expense);
                     },
                   ),
-            error: (message) => Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Error: $message'),
-                  const SizedBox(height: 16),
-                  ElevatedButton(
-                    onPressed: () => context.read<ExpenseListBloc>().add(const ExpenseListEvent.load()),
-                    child: const Text('Retry'),
-                  ),
-                ],
-              ),
-            ),
+            error: (message) => _ErrorView(message: message),
           );
         },
       ),
@@ -58,6 +46,28 @@ class ExpenseListWidget extends StatelessWidget {
       isScrollControlled: true,
       builder: (bottomSheetContext) =>
           BlocProvider.value(value: context.read<ExpenseListBloc>(), child: const AddExpenseBottomSheet()),
+    );
+  }
+}
+
+class _ErrorView extends StatelessWidget {
+  const _ErrorView({required this.message});
+
+  final String message;
+
+  @override
+  Widget build(BuildContext context) {
+    final bloc = context.read<ExpenseListBloc>();
+
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('Error: $message'),
+          const SizedBox(height: 16),
+          ElevatedButton(onPressed: () => bloc.add(const ExpenseListEvent.load()), child: const Text('Retry')),
+        ],
+      ),
     );
   }
 }

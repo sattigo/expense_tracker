@@ -97,9 +97,7 @@ class _AddExpenseBottomSheetState extends State<AddExpenseBottomSheet> {
               ListTile(
                 contentPadding: EdgeInsets.zero,
                 title: const Text('Date'),
-                subtitle: Text(
-                  '${_selectedDate.day.toString().padLeft(2, '0')}.${_selectedDate.month.toString().padLeft(2, '0')}.${_selectedDate.year}',
-                ),
+                subtitle: Text(_formatDate(_selectedDate)),
                 trailing: const Icon(Icons.calendar_today),
                 onTap: () async {
                   final picked = await showDatePicker(
@@ -124,6 +122,10 @@ class _AddExpenseBottomSheetState extends State<AddExpenseBottomSheet> {
         ),
       ),
     );
+  }
+
+  String _formatDate(DateTime date) {
+    return '${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year}';
   }
 
   void _onSave() {
