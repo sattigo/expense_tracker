@@ -12,6 +12,8 @@ class ExpenseListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = context.read<ExpenseListBloc>();
+
     return Scaffold(
       appBar: AppBar(title: const Text('Expense Tracker'), elevation: 2),
       body: BlocBuilder<ExpenseListBloc, ExpenseListState>(
@@ -29,7 +31,7 @@ class ExpenseListWidget extends StatelessWidget {
                       return _ExpenseListItem(expense: expense);
                     },
                   ),
-            error: (message) => _ErrorView(bloc: context.read<ExpenseListBloc>(), message: message),
+            error: (message) => _ErrorView(bloc: bloc, message: message),
           );
         },
       ),

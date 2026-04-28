@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../dto/expense_dto.build.dart';
 
-abstract class ExpenseLocalDataSource {
+abstract interface class ExpenseLocalDataSource {
   Future<List<ExpenseDto>> getExpenses();
   Future<void> saveExpense(ExpenseDto expense);
   Future<ExpenseDto?> getExpenseById(String id);

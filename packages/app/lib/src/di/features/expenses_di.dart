@@ -1,4 +1,4 @@
-import 'package:feature_expenses/feature_expenses.dart';
+import 'package:feature_expenses/feature_expenses_internal.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../service_locator.dart';
 
