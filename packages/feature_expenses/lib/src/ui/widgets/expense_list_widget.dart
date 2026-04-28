@@ -29,7 +29,7 @@ class ExpenseListWidget extends StatelessWidget {
                       return _ExpenseListItem(expense: expense);
                     },
                   ),
-            error: (message) => _ErrorView(message: message),
+            error: (message) => _ErrorView(bloc: context.read<ExpenseListBloc>(), message: message),
           );
         },
       ),
@@ -51,14 +51,13 @@ class ExpenseListWidget extends StatelessWidget {
 }
 
 class _ErrorView extends StatelessWidget {
-  const _ErrorView({required this.message});
+  const _ErrorView({required this.bloc, required this.message});
 
+  final ExpenseListBloc bloc;
   final String message;
 
   @override
   Widget build(BuildContext context) {
-    final bloc = context.read<ExpenseListBloc>();
-
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
