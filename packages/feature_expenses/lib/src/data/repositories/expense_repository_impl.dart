@@ -1,9 +1,9 @@
 import 'package:core_failure/core_failure.dart';
 import 'package:core_result/core_result.dart';
-import '../../domain/models/expense.build.dart';
-import '../../domain/repositories/expense_repository.dart';
-import '../data_sources/local/expense_local_data_source.dart';
-import '../dto/expense_dto.build.dart';
+import 'package:feature_expenses/src/data/data_sources/local/expense_local_data_source.dart';
+import 'package:feature_expenses/src/data/dto/expense_dto.build.dart';
+import 'package:feature_expenses/src/domain/models/expense.build.dart';
+import 'package:feature_expenses/src/domain/repositories/expense_repository.dart';
 
 class ExpenseRepositoryImpl implements ExpenseRepository {
   const ExpenseRepositoryImpl(this._localDataSource);
@@ -16,7 +16,7 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
       final dtos = await _localDataSource.getExpenses();
       final expenses = dtos.map((dto) => dto.toDomain()).toList();
       return Success(expenses);
-    } catch (e) {
+    } on Exception catch (e) {
       return Failure(StorageFailure('Failed to load expenses: $e'));
     }
   }
@@ -24,10 +24,10 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
   @override
   Future<Result<void, AppFailure>> addExpense(Expense expense) async {
     try {
-      final dto = ExpenseDto.fromDomain(expense);
+      final dto = ExpenseDtoMapper.fromDomain(expense);
       await _localDataSource.saveExpense(dto);
       return const Success(null);
-    } catch (e) {
+    } on Exception catch (e) {
       return Failure(StorageFailure('Failed to save expense: $e'));
     }
   }
@@ -40,7 +40,7 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
         return Failure(StorageFailure('Expense with id $id not found'));
       }
       return Success(dto.toDomain());
-    } catch (e) {
+    } on Exception catch (e) {
       return Failure(StorageFailure('Failed to load expense: $e'));
     }
   }

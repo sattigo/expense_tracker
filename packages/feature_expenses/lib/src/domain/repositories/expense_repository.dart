@@ -1,6 +1,6 @@
 import 'package:core_failure/core_failure.dart';
 import 'package:core_result/core_result.dart';
-import '../models/expense.build.dart';
+import 'package:feature_expenses/src/domain/models/expense.build.dart';
 
 abstract interface class ExpenseRepository {
   Future<Result<List<Expense>, AppFailure>> getExpenses();

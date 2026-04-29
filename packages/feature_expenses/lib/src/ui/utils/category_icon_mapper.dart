@@ -1,5 +1,5 @@
+import 'package:feature_expenses/src/domain/models/expense_category.dart';
 import 'package:flutter/material.dart';
-import '../../domain/models/expense_category.dart';
 
 IconData getCategoryIcon(ExpenseCategory category) {
   return switch (category) {

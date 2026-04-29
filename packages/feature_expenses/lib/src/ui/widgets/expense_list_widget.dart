@@ -1,14 +1,16 @@
+import 'dart:async';
+
 import 'package:core_bloc/core_bloc.dart';
 import 'package:core_l10n/core_l10n.dart';
 import 'package:core_navigation/core_navigation.dart';
+import 'package:feature_expenses/src/domain/models/expense.build.dart';
+import 'package:feature_expenses/src/domain/models/expense_type.dart';
+import 'package:feature_expenses/src/ui/bloc/expense_list_bloc.build.dart';
+import 'package:feature_expenses/src/ui/utils/category_display.dart';
+import 'package:feature_expenses/src/ui/utils/category_icon_mapper.dart';
+import 'package:feature_expenses/src/ui/utils/date_formatter.dart';
+import 'package:feature_expenses/src/ui/widgets/add_expense_bottom_sheet.dart';
 import 'package:flutter/material.dart';
-import '../../domain/models/expense.build.dart';
-import '../../domain/models/expense_type.dart';
-import '../bloc/expense_list_bloc.build.dart';
-import '../utils/category_display.dart';
-import '../utils/category_icon_mapper.dart';
-import '../utils/date_formatter.dart';
-import 'add_expense_bottom_sheet.dart';
 
 class ExpenseListWidget extends StatelessWidget {
   const ExpenseListWidget({super.key});
@@ -47,20 +49,22 @@ class ExpenseListWidget extends StatelessWidget {
   }
 
   void _showAddExpenseBottomSheet(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      builder: (bottomSheetContext) =>
-          BlocProvider.value(value: context.read<ExpenseListBloc>(), child: const AddExpenseBottomSheet()),
+    unawaited(
+      showModalBottomSheet<void>(
+        context: context,
+        isScrollControlled: true,
+        builder: (bottomSheetContext) =>
+            BlocProvider.value(value: context.read<ExpenseListBloc>(), child: const AddExpenseBottomSheet()),
+      ),
     );
   }
 }
 
 class _ErrorView extends StatelessWidget {
-  const _ErrorView({required this.bloc, required this.message});
+  const _ErrorView({required ExpenseListBloc bloc, required String message}) : _message = message, _bloc = bloc;
 
-  final ExpenseListBloc bloc;
-  final String message;
+  final ExpenseListBloc _bloc;
+  final String _message;
 
   @override
   Widget build(BuildContext context) {
@@ -70,9 +74,9 @@ class _ErrorView extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(l10n.errorPrefix(message)),
+          Text(l10n.errorPrefix(_message)),
           const SizedBox(height: 16),
-          ElevatedButton(onPressed: () => bloc.add(const ExpenseListEvent.load()), child: Text(l10n.retry)),
+          ElevatedButton(onPressed: () => _bloc.add(const ExpenseListEvent.load()), child: Text(l10n.retry)),
         ],
       ),
     );
@@ -80,31 +84,29 @@ class _ErrorView extends StatelessWidget {
 }
 
 class _ExpenseListItem extends StatelessWidget {
-  const _ExpenseListItem({required this.expense});
+  const _ExpenseListItem({required Expense expense}) : _expense = expense;
 
-  final Expense expense;
+  final Expense _expense;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: () {
-        context.pushNamed(Routes.expenseDetail, extra: expense.id);
-      },
+      onTap: () => unawaited(context.pushNamed(Routes.expenseDetail, extra: _expense.id)),
       leading: CircleAvatar(
-        backgroundColor: expense.type == ExpenseType.income ? Colors.green : Colors.red,
-        child: Icon(getCategoryIcon(expense.category), color: Colors.white),
+        backgroundColor: _expense.type == ExpenseType.income ? Colors.green : Colors.red,
+        child: Icon(getCategoryIcon(_expense.category), color: Colors.white),
       ),
-      title: Text(expense.title),
+      title: Text(_expense.title),
       subtitle: Text(
-        '${expense.category.displayName(context)} • ${formatDate(expense.date)}',
+        '${_expense.category.displayName(context)} • ${formatDate(_expense.date)}',
         style: Theme.of(context).textTheme.bodySmall,
       ),
       trailing: Text(
-        '${expense.type == ExpenseType.income ? '+' : '-'}\$${expense.amount.toStringAsFixed(2)}',
+        '${_expense.type == ExpenseType.income ? '+' : '-'}\$${_expense.amount.toStringAsFixed(2)}',
         style: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.bold,
-          color: expense.type == ExpenseType.income ? Colors.green : Colors.red,
+          color: _expense.type == ExpenseType.income ? Colors.green : Colors.red,
         ),
       ),
     );

@@ -1,6 +1,6 @@
+import 'package:feature_expenses/src/domain/models/expense_category.dart';
+import 'package:feature_expenses/src/domain/models/expense_type.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'expense_category.dart';
-import 'expense_type.dart';
 
 part 'expense.build.freezed.dart';
 part 'expense.build.g.dart';

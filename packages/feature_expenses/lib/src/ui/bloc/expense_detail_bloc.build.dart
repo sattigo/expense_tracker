@@ -1,8 +1,8 @@
 import 'package:core_bloc/core_bloc.dart';
 import 'package:core_result/core_result.dart';
+import 'package:feature_expenses/src/domain/models/expense.build.dart';
+import 'package:feature_expenses/src/domain/use_cases/get_expense_by_id_use_case.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../../domain/models/expense.build.dart';
-import '../../domain/use_cases/get_expense_by_id_use_case.dart';
 
 part 'expense_detail_event.dart';
 part 'expense_detail_state.dart';
