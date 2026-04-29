@@ -1,0 +1,17 @@
+name: core_bloc
+description: Base BLoC class for state management
+version: 1.0.0
+publish_to: none
+
+environment:
+  sdk: ">=3.11.1 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_bloc: 8.1.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: 6.0.0

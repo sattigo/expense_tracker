@@ -1,0 +1,22 @@
+{
+  "@@locale": "ru",
+  "appTitle": "Трекер расходов",
+  "noExpensesYet": "Расходов пока нет",
+  "noExpensesYetAddFirst": "Расходов пока нет. Добавьте первую транзакцию!",
+  "errorPrefix": "Ошибка: {message}",
+  "retry": "Повторить",
+  "addTransaction": "Добавить транзакцию",
+  "title": "Название",
+  "pleaseEnterTitle": "Введите название",
+  "amount": "Сумма",
+  "pleaseEnterAmount": "Введите сумму",
+  "pleaseEnterValidNumber": "Введите корректное число",
+  "type": "Тип",
+  "category": "Категория",
+  "date": "Дата",
+  "save": "Сохранить",
+  "transactionDetails": "Детали транзакции",
+  "noData": "Нет данных",
+  "goBack": "Назад",
+  "transactionId": "ID транзакции"
+}

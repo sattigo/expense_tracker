@@ -1,0 +1,16 @@
+name: core_result
+description: Result sealed class for handling success and failure states
+version: 1.0.0
+publish_to: none
+
+environment:
+  sdk: ">=3.11.1 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: 6.0.0
