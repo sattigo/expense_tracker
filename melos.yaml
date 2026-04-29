@@ -14,7 +14,6 @@ scripts:
       melos exec -- "find lib -name '*.dart'
       ! -name '*.g.dart'
       ! -name '*.freezed.dart'
-      ! -name '*.build.dart'
       -print0 | xargs -0 dart format --line-length 120"
 
   gen:
@@ -30,9 +29,8 @@ scripts:
     run: melos exec --dir-exists="test" -- flutter test
 
   reinit:
-    description: Clean pub cache, clean melos workspace, bootstrap and pub get
+    description: Clean pub cache, clean melos workspace, bootstrap
     steps:
       - flutter pub cache clean -f
       - melos clean
       - melos bootstrap
-      - melos exec -- flutter pub get

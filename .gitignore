@@ -86,3 +86,6 @@ Icon?
 # [ignorium] [END AUTO GENERATE SECTION]
 # Melos workspace files
 pubspec_overrides.yaml
+
+# Lock files of internal packages — only root pubspec.lock is tracked
+packages/**/pubspec.lock
