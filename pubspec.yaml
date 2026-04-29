@@ -28,6 +28,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   ignorium: "1.0.0"
+  lintorium: "311.0.0"
   melos: "7.5.1"
 
 flutter:

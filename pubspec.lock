@@ -405,6 +405,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.2"
+  lintorium:
+    dependency: "direct dev"
+    description:
+      name: lintorium
+      sha256: "37ddce2a2882a6b716fbd6a78784bef534a7b948a96b88952c5b9c161a6daef2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "311.0.0"
   lints:
     dependency: transitive
     description:

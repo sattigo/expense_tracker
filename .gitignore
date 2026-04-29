@@ -84,6 +84,7 @@ build/
 Icon?
 
 # [ignorium] [END AUTO GENERATE SECTION]
+
 # Melos workspace files
 pubspec_overrides.yaml
 

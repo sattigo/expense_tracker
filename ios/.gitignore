@@ -39,6 +39,9 @@ Runner/GeneratedPluginRegistrant.*
 # [ignorium] ⚠️ Manual changes may be overwritten.
 # [ignorium] Learn more: https://pub.dev/packages/ignorium.
 
+# [ignorium] [CocoaPods]
+Pods/
+
 # [ignorium] [Flutter iOS app project]
 .generated/
 .symlinks/
