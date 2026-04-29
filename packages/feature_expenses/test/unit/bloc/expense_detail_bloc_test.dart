@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:core_failure/core_failure.dart';
 import 'package:core_result/core_result.dart';
 import 'package:feature_expenses/src/domain/models/expense.build.dart';
@@ -18,7 +20,7 @@ void main() {
 
   final testExpense = Expense(
     id: 'test-id-1',
-    amount: 100.0,
+    amount: 100,
     title: 'Test Expense',
     date: DateTime(2026, 4, 28),
     category: ExpenseCategory.food,
@@ -31,8 +33,8 @@ void main() {
     bloc = ExpenseDetailBloc(getExpenseByIdUseCase: getExpenseByIdUseCase);
   });
 
-  tearDown(() {
-    bloc.close();
+  tearDown(() async {
+    await bloc.close();
   });
 
   group('ExpenseDetailBloc', () {
@@ -45,11 +47,11 @@ void main() {
 
       final expectedStates = [const ExpenseDetailState.loading(), ExpenseDetailState.loaded(testExpense)];
 
-      expectLater(bloc.stream, emitsInOrder(expectedStates));
+      unawaited(expectLater(bloc.stream, emitsInOrder(expectedStates)));
 
       bloc.add(const ExpenseDetailEvent.load('test-id-1'));
 
-      await Future.delayed(const Duration(milliseconds: 100));
+      await Future<void>.delayed(const Duration(milliseconds: 100));
 
       verify(() => mockRepository.getExpenseById('test-id-1')).called(1);
     });
@@ -61,11 +63,11 @@ void main() {
 
       final expectedStates = [const ExpenseDetailState.loading(), const ExpenseDetailState.error('Expense not found')];
 
-      expectLater(bloc.stream, emitsInOrder(expectedStates));
+      unawaited(expectLater(bloc.stream, emitsInOrder(expectedStates)));
 
       bloc.add(const ExpenseDetailEvent.load('test-id-1'));
 
-      await Future.delayed(const Duration(milliseconds: 100));
+      await Future<void>.delayed(const Duration(milliseconds: 100));
 
       verify(() => mockRepository.getExpenseById('test-id-1')).called(1);
     });
@@ -77,11 +79,11 @@ void main() {
 
       final expectedStates = [const ExpenseDetailState.loading(), const ExpenseDetailState.error('Expense not found')];
 
-      expectLater(bloc.stream, emitsInOrder(expectedStates));
+      unawaited(expectLater(bloc.stream, emitsInOrder(expectedStates)));
 
       bloc.add(const ExpenseDetailEvent.load('invalid-id'));
 
-      await Future.delayed(const Duration(milliseconds: 100));
+      await Future<void>.delayed(const Duration(milliseconds: 100));
 
       verify(() => mockRepository.getExpenseById('invalid-id')).called(1);
     });

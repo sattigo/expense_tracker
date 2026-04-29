@@ -1,6 +1,6 @@
 import 'package:core_l10n/core_l10n.dart';
+import 'package:feature_expenses/src/domain/models/expense_type.dart';
 import 'package:flutter/widgets.dart';
-import '../../domain/models/expense_type.dart';
 
 extension ExpenseTypeDisplay on ExpenseType {
   String displayName(BuildContext context) {

@@ -1,6 +1,6 @@
+import 'package:app/src/di/service_locator.dart';
 import 'package:feature_expenses/feature_expenses_internal.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../service_locator.dart';
 
 Future<void> setupExpensesDI() async {
   getIt.registerSingleton<ExpenseLocalDataSource>(ExpenseLocalDataSourceImpl(getIt<SharedPreferences>()));

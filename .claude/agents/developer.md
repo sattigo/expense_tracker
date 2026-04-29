@@ -38,6 +38,10 @@ git checkout -b feature/<название>
 ### Шаг 3 — Реализуй фичу
 - Следуй структуре и правилам из `flutter_developer` скилла
 - Соблюдай поток данных: Event → BLoC → UseCase → Repository → DataSource
+- Если нужна последняя версия пакета — один запрос к pub.dev, без итеративных скриптов:
+```bash
+curl -s https://pub.dev/api/packages/<name> | python3 -c "import sys,json; print(json.load(sys.stdin)['latest']['version'])"
+```
 - Если затронуты freezed-модели — запусти build_runner:
 ```bash
 dart run build_runner build --delete-conflicting-outputs
@@ -58,4 +62,4 @@ type(scope): what
 - Типы: `feat`, `fix`, `refactor`, `chore`
 
 ### Шаг 5 — Доложи оркестратору
-Кратко: что сделано, какие файлы созданы или изменены.
+Максимум 20 строк. Только: что сделано, какие файлы созданы или изменены, были ли компромиссы на итерации 3/3.

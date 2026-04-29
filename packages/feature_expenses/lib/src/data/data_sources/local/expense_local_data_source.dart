@@ -1,6 +1,6 @@
 import 'dart:convert';
+import 'package:feature_expenses/src/data/dto/expense_dto.build.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../dto/expense_dto.build.dart';
 
 abstract interface class ExpenseLocalDataSource {
   Future<List<ExpenseDto>> getExpenses();
@@ -16,10 +16,12 @@ class ExpenseLocalDataSourceImpl implements ExpenseLocalDataSource {
 
   @override
   Future<List<ExpenseDto>> getExpenses() async {
-    final String? jsonString = _prefs.getString(_key);
-    if (jsonString == null) return [];
+    final jsonString = _prefs.getString(_key);
+    if (jsonString == null) {
+      return [];
+    }
 
-    final List<dynamic> jsonList = jsonDecode(jsonString) as List<dynamic>;
+    final jsonList = jsonDecode(jsonString) as List<dynamic>;
     return jsonList.map((json) => ExpenseDto.fromJson(json as Map<String, dynamic>)).toList();
   }
 
@@ -35,10 +37,6 @@ class ExpenseLocalDataSourceImpl implements ExpenseLocalDataSource {
   @override
   Future<ExpenseDto?> getExpenseById(String id) async {
     final expenses = await getExpenses();
-    try {
-      return expenses.firstWhere((e) => e.id == id);
-    } catch (_) {
-      return null;
-    }
+    return expenses.where((e) => e.id == id).firstOrNull;
   }
 }

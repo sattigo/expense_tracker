@@ -6,7 +6,7 @@ part of 'expense_dto.build.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ExpenseDtoImpl _$$ExpenseDtoImplFromJson(Map<String, dynamic> json) => _$ExpenseDtoImpl(
+_ExpenseDto _$ExpenseDtoFromJson(Map<String, dynamic> json) => _ExpenseDto(
   id: json['id'] as String,
   amount: (json['amount'] as num).toDouble(),
   title: json['title'] as String,
@@ -15,11 +15,12 @@ _$ExpenseDtoImpl _$$ExpenseDtoImplFromJson(Map<String, dynamic> json) => _$Expen
   type: json['type'] as String,
 );
 
-Map<String, dynamic> _$$ExpenseDtoImplToJson(_$ExpenseDtoImpl instance) => <String, dynamic>{
-  'id': instance.id,
-  'amount': instance.amount,
-  'title': instance.title,
-  'date': instance.date,
-  'category': instance.category,
-  'type': instance.type,
-};
+Map<String, dynamic> _$ExpenseDtoToJson(_ExpenseDto instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'amount': instance.amount,
+      'title': instance.title,
+      'date': instance.date,
+      'category': instance.category,
+      'type': instance.type,
+    };

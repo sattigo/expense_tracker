@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,755 +9,640 @@ part of 'expense_detail_bloc.build.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
-
 /// @nodoc
 mixin _$ExpenseDetailEvent {
-  String get id => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({required TResult Function(String id) load}) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({TResult? Function(String id)? load}) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({TResult Function(String id)? load, required TResult orElse()}) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({required TResult Function(LoadExpenseDetail value) load}) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({TResult? Function(LoadExpenseDetail value)? load}) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadExpenseDetail value)? load,
-    required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
-  $ExpenseDetailEventCopyWith<ExpenseDetailEvent> get copyWith => throw _privateConstructorUsedError;
+ String get id;
+/// Create a copy of ExpenseDetailEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ExpenseDetailEventCopyWith<ExpenseDetailEvent> get copyWith => _$ExpenseDetailEventCopyWithImpl<ExpenseDetailEvent>(this as ExpenseDetailEvent, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ExpenseDetailEvent&&(identical(other.id, id) || other.id == id));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,id);
+
+@override
+String toString() {
+  return 'ExpenseDetailEvent(id: $id)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $ExpenseDetailEventCopyWith<$Res> {
-  factory $ExpenseDetailEventCopyWith(ExpenseDetailEvent value, $Res Function(ExpenseDetailEvent) then) =
-      _$ExpenseDetailEventCopyWithImpl<$Res, ExpenseDetailEvent>;
-  @useResult
-  $Res call({String id});
-}
+abstract mixin class $ExpenseDetailEventCopyWith<$Res>  {
+  factory $ExpenseDetailEventCopyWith(ExpenseDetailEvent value, $Res Function(ExpenseDetailEvent) _then) = _$ExpenseDetailEventCopyWithImpl;
+@useResult
+$Res call({
+ String id
+});
 
+
+
+
+}
 /// @nodoc
-class _$ExpenseDetailEventCopyWithImpl<$Res, $Val extends ExpenseDetailEvent>
+class _$ExpenseDetailEventCopyWithImpl<$Res>
     implements $ExpenseDetailEventCopyWith<$Res> {
-  _$ExpenseDetailEventCopyWithImpl(this._value, this._then);
+  _$ExpenseDetailEventCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final ExpenseDetailEvent _self;
+  final $Res Function(ExpenseDetailEvent) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({Object? id = null}) {
-    return _then(
-      _value.copyWith(
-            id: null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                      as String,
-          )
-          as $Val,
-    );
-  }
+/// Create a copy of ExpenseDetailEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,}) {
+  return _then(_self.copyWith(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [ExpenseDetailEvent].
+extension ExpenseDetailEventPatterns on ExpenseDetailEvent {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( LoadExpenseDetail value)?  load,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case LoadExpenseDetail() when load != null:
+return load(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( LoadExpenseDetail value)  load,}){
+final _that = this;
+switch (_that) {
+case LoadExpenseDetail():
+return load(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( LoadExpenseDetail value)?  load,}){
+final _that = this;
+switch (_that) {
+case LoadExpenseDetail() when load != null:
+return load(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String id)?  load,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case LoadExpenseDetail() when load != null:
+return load(_that.id);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String id)  load,}) {final _that = this;
+switch (_that) {
+case LoadExpenseDetail():
+return load(_that.id);}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String id)?  load,}) {final _that = this;
+switch (_that) {
+case LoadExpenseDetail() when load != null:
+return load(_that.id);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
-abstract class _$$LoadExpenseDetailImplCopyWith<$Res> implements $ExpenseDetailEventCopyWith<$Res> {
-  factory _$$LoadExpenseDetailImplCopyWith(_$LoadExpenseDetailImpl value, $Res Function(_$LoadExpenseDetailImpl) then) =
-      __$$LoadExpenseDetailImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String id});
+
+
+class LoadExpenseDetail implements ExpenseDetailEvent {
+  const LoadExpenseDetail(this.id);
+  
+
+@override final  String id;
+
+/// Create a copy of ExpenseDetailEvent
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$LoadExpenseDetailCopyWith<LoadExpenseDetail> get copyWith => _$LoadExpenseDetailCopyWithImpl<LoadExpenseDetail>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoadExpenseDetail&&(identical(other.id, id) || other.id == id));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,id);
+
+@override
+String toString() {
+  return 'ExpenseDetailEvent.load(id: $id)';
+}
+
+
 }
 
 /// @nodoc
-class __$$LoadExpenseDetailImplCopyWithImpl<$Res>
-    extends _$ExpenseDetailEventCopyWithImpl<$Res, _$LoadExpenseDetailImpl>
-    implements _$$LoadExpenseDetailImplCopyWith<$Res> {
-  __$$LoadExpenseDetailImplCopyWithImpl(_$LoadExpenseDetailImpl _value, $Res Function(_$LoadExpenseDetailImpl) _then)
-    : super(_value, _then);
+abstract mixin class $LoadExpenseDetailCopyWith<$Res> implements $ExpenseDetailEventCopyWith<$Res> {
+  factory $LoadExpenseDetailCopyWith(LoadExpenseDetail value, $Res Function(LoadExpenseDetail) _then) = _$LoadExpenseDetailCopyWithImpl;
+@override @useResult
+$Res call({
+ String id
+});
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({Object? id = null}) {
-    return _then(
-      _$LoadExpenseDetailImpl(
-        null == id
-            ? _value.id
-            : id // ignore: cast_nullable_to_non_nullable
-                  as String,
-      ),
-    );
-  }
+
+
+
 }
-
 /// @nodoc
+class _$LoadExpenseDetailCopyWithImpl<$Res>
+    implements $LoadExpenseDetailCopyWith<$Res> {
+  _$LoadExpenseDetailCopyWithImpl(this._self, this._then);
 
-class _$LoadExpenseDetailImpl implements LoadExpenseDetail {
-  const _$LoadExpenseDetailImpl(this.id);
+  final LoadExpenseDetail _self;
+  final $Res Function(LoadExpenseDetail) _then;
 
-  @override
-  final String id;
-
-  @override
-  String toString() {
-    return 'ExpenseDetailEvent.load(id: $id)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LoadExpenseDetailImpl &&
-            (identical(other.id, id) || other.id == id));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, id);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LoadExpenseDetailImplCopyWith<_$LoadExpenseDetailImpl> get copyWith =>
-      __$$LoadExpenseDetailImplCopyWithImpl<_$LoadExpenseDetailImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({required TResult Function(String id) load}) {
-    return load(id);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({TResult? Function(String id)? load}) {
-    return load?.call(id);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({TResult Function(String id)? load, required TResult orElse()}) {
-    if (load != null) {
-      return load(id);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({required TResult Function(LoadExpenseDetail value) load}) {
-    return load(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({TResult? Function(LoadExpenseDetail value)? load}) {
-    return load?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadExpenseDetail value)? load,
-    required TResult orElse(),
-  }) {
-    if (load != null) {
-      return load(this);
-    }
-    return orElse();
-  }
+/// Create a copy of ExpenseDetailEvent
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,}) {
+  return _then(LoadExpenseDetail(
+null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
 }
 
-abstract class LoadExpenseDetail implements ExpenseDetailEvent {
-  const factory LoadExpenseDetail(final String id) = _$LoadExpenseDetailImpl;
 
-  @override
-  String get id;
-  @override
-  @JsonKey(ignore: true)
-  _$$LoadExpenseDetailImplCopyWith<_$LoadExpenseDetailImpl> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 mixin _$ExpenseDetailState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(Expense expense) loaded,
-    required TResult Function(String message) error,
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(Expense expense)? loaded,
-    TResult? Function(String message)? error,
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(Expense expense)? loaded,
-    TResult Function(String message)? error,
-    required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Error value) error,
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Error value)? error,
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ExpenseDetailState);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'ExpenseDetailState()';
+}
+
+
 }
 
 /// @nodoc
-abstract class $ExpenseDetailStateCopyWith<$Res> {
-  factory $ExpenseDetailStateCopyWith(ExpenseDetailState value, $Res Function(ExpenseDetailState) then) =
-      _$ExpenseDetailStateCopyWithImpl<$Res, ExpenseDetailState>;
+class $ExpenseDetailStateCopyWith<$Res>  {
+$ExpenseDetailStateCopyWith(ExpenseDetailState _, $Res Function(ExpenseDetailState) __);
 }
 
-/// @nodoc
-class _$ExpenseDetailStateCopyWithImpl<$Res, $Val extends ExpenseDetailState>
-    implements $ExpenseDetailStateCopyWith<$Res> {
-  _$ExpenseDetailStateCopyWithImpl(this._value, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+/// Adds pattern-matching-related methods to [ExpenseDetailState].
+extension ExpenseDetailStatePatterns on ExpenseDetailState {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( _Loading value)?  loading,TResult Function( _Loaded value)?  loaded,TResult Function( _Error value)?  error,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _Initial() when initial != null:
+return initial(_that);case _Loading() when loading != null:
+return loading(_that);case _Loaded() when loaded != null:
+return loaded(_that);case _Error() when error != null:
+return error(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( _Loading value)  loading,required TResult Function( _Loaded value)  loaded,required TResult Function( _Error value)  error,}){
+final _that = this;
+switch (_that) {
+case _Initial():
+return initial(_that);case _Loading():
+return loading(_that);case _Loaded():
+return loaded(_that);case _Error():
+return error(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( _Loading value)?  loading,TResult? Function( _Loaded value)?  loaded,TResult? Function( _Error value)?  error,}){
+final _that = this;
+switch (_that) {
+case _Initial() when initial != null:
+return initial(_that);case _Loading() when loading != null:
+return loading(_that);case _Loaded() when loaded != null:
+return loaded(_that);case _Error() when error != null:
+return error(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( Expense expense)?  loaded,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _Initial() when initial != null:
+return initial();case _Loading() when loading != null:
+return loading();case _Loaded() when loaded != null:
+return loaded(_that.expense);case _Error() when error != null:
+return error(_that.message);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( Expense expense)  loaded,required TResult Function( String message)  error,}) {final _that = this;
+switch (_that) {
+case _Initial():
+return initial();case _Loading():
+return loading();case _Loaded():
+return loaded(_that.expense);case _Error():
+return error(_that.message);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( Expense expense)?  loaded,TResult? Function( String message)?  error,}) {final _that = this;
+switch (_that) {
+case _Initial() when initial != null:
+return initial();case _Loading() when loading != null:
+return loading();case _Loaded() when loaded != null:
+return loaded(_that.expense);case _Error() when error != null:
+return error(_that.message);case _:
+  return null;
+
+}
 }
 
-/// @nodoc
-abstract class _$$InitialImplCopyWith<$Res> {
-  factory _$$InitialImplCopyWith(_$InitialImpl value, $Res Function(_$InitialImpl) then) =
-      __$$InitialImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$InitialImplCopyWithImpl<$Res> extends _$ExpenseDetailStateCopyWithImpl<$Res, _$InitialImpl>
-    implements _$$InitialImplCopyWith<$Res> {
-  __$$InitialImplCopyWithImpl(_$InitialImpl _value, $Res Function(_$InitialImpl) _then) : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$InitialImpl implements _Initial {
-  const _$InitialImpl();
-
-  @override
-  String toString() {
-    return 'ExpenseDetailState.initial()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType && other is _$InitialImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(Expense expense) loaded,
-    required TResult Function(String message) error,
-  }) {
-    return initial();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(Expense expense)? loaded,
-    TResult? Function(String message)? error,
-  }) {
-    return initial?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(Expense expense)? loaded,
-    TResult Function(String message)? error,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Error value) error,
-  }) {
-    return initial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Error value)? error,
-  }) {
-    return initial?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Initial implements ExpenseDetailState {
-  const factory _Initial() = _$InitialImpl;
-}
-
-/// @nodoc
-abstract class _$$LoadingImplCopyWith<$Res> {
-  factory _$$LoadingImplCopyWith(_$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
-      __$$LoadingImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$LoadingImplCopyWithImpl<$Res> extends _$ExpenseDetailStateCopyWithImpl<$Res, _$LoadingImpl>
-    implements _$$LoadingImplCopyWith<$Res> {
-  __$$LoadingImplCopyWithImpl(_$LoadingImpl _value, $Res Function(_$LoadingImpl) _then) : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$LoadingImpl implements _Loading {
-  const _$LoadingImpl();
 
-  @override
-  String toString() {
-    return 'ExpenseDetailState.loading()';
-  }
+class _Initial implements ExpenseDetailState {
+  const _Initial();
+  
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType && other is _$LoadingImpl);
-  }
 
-  @override
-  int get hashCode => runtimeType.hashCode;
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(Expense expense) loaded,
-    required TResult Function(String message) error,
-  }) {
-    return loading();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(Expense expense)? loaded,
-    TResult? Function(String message)? error,
-  }) {
-    return loading?.call();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(Expense expense)? loaded,
-    TResult Function(String message)? error,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading();
-    }
-    return orElse();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Error value) error,
-  }) {
-    return loading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Error value)? error,
-  }) {
-    return loading?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Initial);
 }
 
-abstract class _Loading implements ExpenseDetailState {
-  const factory _Loading() = _$LoadingImpl;
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'ExpenseDetailState.initial()';
 }
 
-/// @nodoc
-abstract class _$$LoadedImplCopyWith<$Res> {
-  factory _$$LoadedImplCopyWith(_$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
-      __$$LoadedImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({Expense expense});
 
-  $ExpenseCopyWith<$Res> get expense;
 }
 
-/// @nodoc
-class __$$LoadedImplCopyWithImpl<$Res> extends _$ExpenseDetailStateCopyWithImpl<$Res, _$LoadedImpl>
-    implements _$$LoadedImplCopyWith<$Res> {
-  __$$LoadedImplCopyWithImpl(_$LoadedImpl _value, $Res Function(_$LoadedImpl) _then) : super(_value, _then);
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({Object? expense = null}) {
-    return _then(
-      _$LoadedImpl(
-        null == expense
-            ? _value.expense
-            : expense // ignore: cast_nullable_to_non_nullable
-                  as Expense,
-      ),
-    );
-  }
 
-  @override
-  @pragma('vm:prefer-inline')
-  $ExpenseCopyWith<$Res> get expense {
-    return $ExpenseCopyWith<$Res>(_value.expense, (value) {
-      return _then(_value.copyWith(expense: value));
-    });
-  }
-}
 
 /// @nodoc
 
-class _$LoadedImpl implements _Loaded {
-  const _$LoadedImpl(this.expense);
 
-  @override
-  final Expense expense;
+class _Loading implements ExpenseDetailState {
+  const _Loading();
+  
 
-  @override
-  String toString() {
-    return 'ExpenseDetailState.loaded(expense: $expense)';
-  }
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LoadedImpl &&
-            (identical(other.expense, expense) || other.expense == expense));
-  }
 
-  @override
-  int get hashCode => Object.hash(runtimeType, expense);
 
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith => __$$LoadedImplCopyWithImpl<_$LoadedImpl>(this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(Expense expense) loaded,
-    required TResult Function(String message) error,
-  }) {
-    return loaded(expense);
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(Expense expense)? loaded,
-    TResult? Function(String message)? error,
-  }) {
-    return loaded?.call(expense);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(Expense expense)? loaded,
-    TResult Function(String message)? error,
-    required TResult orElse(),
-  }) {
-    if (loaded != null) {
-      return loaded(expense);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Error value) error,
-  }) {
-    return loaded(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Error value)? error,
-  }) {
-    return loaded?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (loaded != null) {
-      return loaded(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Loading);
 }
 
-abstract class _Loaded implements ExpenseDetailState {
-  const factory _Loaded(final Expense expense) = _$LoadedImpl;
 
-  Expense get expense;
-  @JsonKey(ignore: true)
-  _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith => throw _privateConstructorUsedError;
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'ExpenseDetailState.loading()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _Loaded implements ExpenseDetailState {
+  const _Loaded(this.expense);
+  
+
+ final  Expense expense;
+
+/// Create a copy of ExpenseDetailState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$LoadedCopyWith<_Loaded> get copyWith => __$LoadedCopyWithImpl<_Loaded>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Loaded&&(identical(other.expense, expense) || other.expense == expense));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,expense);
+
+@override
+String toString() {
+  return 'ExpenseDetailState.loaded(expense: $expense)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$ErrorImplCopyWith<$Res> {
-  factory _$$ErrorImplCopyWith(_$ErrorImpl value, $Res Function(_$ErrorImpl) then) = __$$ErrorImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String message});
+abstract mixin class _$LoadedCopyWith<$Res> implements $ExpenseDetailStateCopyWith<$Res> {
+  factory _$LoadedCopyWith(_Loaded value, $Res Function(_Loaded) _then) = __$LoadedCopyWithImpl;
+@useResult
+$Res call({
+ Expense expense
+});
+
+
+$ExpenseCopyWith<$Res> get expense;
+
+}
+/// @nodoc
+class __$LoadedCopyWithImpl<$Res>
+    implements _$LoadedCopyWith<$Res> {
+  __$LoadedCopyWithImpl(this._self, this._then);
+
+  final _Loaded _self;
+  final $Res Function(_Loaded) _then;
+
+/// Create a copy of ExpenseDetailState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? expense = null,}) {
+  return _then(_Loaded(
+null == expense ? _self.expense : expense // ignore: cast_nullable_to_non_nullable
+as Expense,
+  ));
 }
 
-/// @nodoc
-class __$$ErrorImplCopyWithImpl<$Res> extends _$ExpenseDetailStateCopyWithImpl<$Res, _$ErrorImpl>
-    implements _$$ErrorImplCopyWith<$Res> {
-  __$$ErrorImplCopyWithImpl(_$ErrorImpl _value, $Res Function(_$ErrorImpl) _then) : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({Object? message = null}) {
-    return _then(
-      _$ErrorImpl(
-        null == message
-            ? _value.message
-            : message // ignore: cast_nullable_to_non_nullable
-                  as String,
-      ),
-    );
-  }
+/// Create a copy of ExpenseDetailState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ExpenseCopyWith<$Res> get expense {
+  
+  return $ExpenseCopyWith<$Res>(_self.expense, (value) {
+    return _then(_self.copyWith(expense: value));
+  });
+}
 }
 
 /// @nodoc
 
-class _$ErrorImpl implements _Error {
-  const _$ErrorImpl(this.message);
 
-  @override
-  final String message;
+class _Error implements ExpenseDetailState {
+  const _Error(this.message);
+  
 
-  @override
-  String toString() {
-    return 'ExpenseDetailState.error(message: $message)';
-  }
+ final  String message;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ErrorImpl &&
-            (identical(other.message, message) || other.message == message));
-  }
+/// Create a copy of ExpenseDetailState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ErrorCopyWith<_Error> get copyWith => __$ErrorCopyWithImpl<_Error>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith => __$$ErrorImplCopyWithImpl<_$ErrorImpl>(this, _$identity);
 
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(Expense expense) loaded,
-    required TResult Function(String message) error,
-  }) {
-    return error(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(Expense expense)? loaded,
-    TResult? Function(String message)? error,
-  }) {
-    return error?.call(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(Expense expense)? loaded,
-    TResult Function(String message)? error,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(message);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Error value) error,
-  }) {
-    return error(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Error value)? error,
-  }) {
-    return error?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(this);
-    }
-    return orElse();
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Error&&(identical(other.message, message) || other.message == message));
 }
 
-abstract class _Error implements ExpenseDetailState {
-  const factory _Error(final String message) = _$ErrorImpl;
 
-  String get message;
-  @JsonKey(ignore: true)
-  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith => throw _privateConstructorUsedError;
+@override
+int get hashCode => Object.hash(runtimeType,message);
+
+@override
+String toString() {
+  return 'ExpenseDetailState.error(message: $message)';
 }
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ErrorCopyWith<$Res> implements $ExpenseDetailStateCopyWith<$Res> {
+  factory _$ErrorCopyWith(_Error value, $Res Function(_Error) _then) = __$ErrorCopyWithImpl;
+@useResult
+$Res call({
+ String message
+});
+
+
+
+
+}
+/// @nodoc
+class __$ErrorCopyWithImpl<$Res>
+    implements _$ErrorCopyWith<$Res> {
+  __$ErrorCopyWithImpl(this._self, this._then);
+
+  final _Error _self;
+  final $Res Function(_Error) _then;
+
+/// Create a copy of ExpenseDetailState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
+  return _then(_Error(
+null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+// dart format on

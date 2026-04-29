@@ -1,13 +1,13 @@
 import 'package:core_bloc/core_bloc.dart';
 import 'package:core_l10n/core_l10n.dart';
+import 'package:feature_expenses/src/domain/models/expense.build.dart';
+import 'package:feature_expenses/src/domain/models/expense_type.dart';
+import 'package:feature_expenses/src/ui/bloc/expense_detail_bloc.build.dart';
+import 'package:feature_expenses/src/ui/utils/category_display.dart';
+import 'package:feature_expenses/src/ui/utils/category_icon_mapper.dart';
+import 'package:feature_expenses/src/ui/utils/date_formatter.dart';
+import 'package:feature_expenses/src/ui/utils/type_display.dart';
 import 'package:flutter/material.dart';
-import '../../domain/models/expense.build.dart';
-import '../../domain/models/expense_type.dart';
-import '../bloc/expense_detail_bloc.build.dart';
-import '../utils/category_display.dart';
-import '../utils/category_icon_mapper.dart';
-import '../utils/date_formatter.dart';
-import '../utils/type_display.dart';
 
 class ExpenseDetailWidget extends StatelessWidget {
   const ExpenseDetailWidget({super.key});
@@ -43,9 +43,9 @@ class ExpenseDetailWidget extends StatelessWidget {
 }
 
 class _ExpenseDetailContent extends StatelessWidget {
-  const _ExpenseDetailContent({required this.expense});
+  const _ExpenseDetailContent({required Expense expense}) : _expense = expense;
 
-  final Expense expense;
+  final Expense _expense;
 
   @override
   Widget build(BuildContext context) {
@@ -59,31 +59,31 @@ class _ExpenseDetailContent extends StatelessWidget {
           Center(
             child: CircleAvatar(
               radius: 48,
-              backgroundColor: expense.type == ExpenseType.income ? Colors.green : Colors.red,
-              child: Icon(getCategoryIcon(expense.category), size: 48, color: Colors.white),
+              backgroundColor: _expense.type == ExpenseType.income ? Colors.green : Colors.red,
+              child: Icon(getCategoryIcon(_expense.category), size: 48, color: Colors.white),
             ),
           ),
           const SizedBox(height: 24),
           Center(
             child: Text(
-              '${expense.type == ExpenseType.income ? '+' : '-'}\$${expense.amount.toStringAsFixed(2)}',
+              '${_expense.type == ExpenseType.income ? '+' : '-'}\$${_expense.amount.toStringAsFixed(2)}',
               style: TextStyle(
                 fontSize: 32,
                 fontWeight: FontWeight.bold,
-                color: expense.type == ExpenseType.income ? Colors.green : Colors.red,
+                color: _expense.type == ExpenseType.income ? Colors.green : Colors.red,
               ),
             ),
           ),
           const SizedBox(height: 32),
-          _DetailRow(label: l10n.title, value: expense.title),
+          _DetailRow(label: l10n.title, value: _expense.title),
           const Divider(),
-          _DetailRow(label: l10n.type, value: expense.type.displayName(context)),
+          _DetailRow(label: l10n.type, value: _expense.type.displayName(context)),
           const Divider(),
-          _DetailRow(label: l10n.category, value: expense.category.displayName(context)),
+          _DetailRow(label: l10n.category, value: _expense.category.displayName(context)),
           const Divider(),
-          _DetailRow(label: l10n.date, value: formatDate(expense.date)),
+          _DetailRow(label: l10n.date, value: formatDate(_expense.date)),
           const Divider(),
-          _DetailRow(label: l10n.transactionId, value: expense.id),
+          _DetailRow(label: l10n.transactionId, value: _expense.id),
         ],
       ),
     );
@@ -91,10 +91,10 @@ class _ExpenseDetailContent extends StatelessWidget {
 }
 
 class _DetailRow extends StatelessWidget {
-  const _DetailRow({required this.label, required this.value});
+  const _DetailRow({required String label, required String value}) : _value = value, _label = label;
 
-  final String label;
-  final String value;
+  final String _label;
+  final String _value;
 
   @override
   Widget build(BuildContext context) {
@@ -105,10 +105,10 @@ class _DetailRow extends StatelessWidget {
         children: [
           SizedBox(
             width: 120,
-            child: Text(label, style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.grey[600])),
+            child: Text(_label, style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.grey[600])),
           ),
           Expanded(
-            child: Text(value, style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500)),
+            child: Text(_value, style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500)),
           ),
         ],
       ),

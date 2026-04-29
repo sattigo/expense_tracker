@@ -6,6 +6,16 @@ version: 1.0.0+1
 environment:
   sdk: ">=3.11.1 <4.0.0"
 
+workspace:
+  - packages/app
+  - packages/core_bloc
+  - packages/core_chain
+  - packages/core_failure
+  - packages/core_l10n
+  - packages/core_navigation
+  - packages/core_result
+  - packages/feature_expenses
+
 dependencies:
   app:
     path: packages/app
@@ -18,7 +28,41 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   ignorium: "1.0.0"
-  melos: "6.0.0"
+  lintorium: "311.0.0"
+  melos: "7.5.1"
 
 flutter:
   uses-material-design: true
+
+melos:
+  command:
+    bootstrap:
+      usePubspecOverrides: true
+  scripts:
+    format:
+      description: Format all Dart files (excluding generated files) with line length 120
+      run: >
+        melos exec -- "find lib -name '*.dart'
+        ! -name '*.g.dart'
+        ! -name '*.freezed.dart'
+        -print0 | xargs -0 dart format --line-length 120"
+
+    gen:
+      description: Run build_runner code generation in packages that depend on build_runner
+      run: melos exec --depends-on="build_runner" -- dart run build_runner build --delete-conflicting-outputs
+
+    analyze:
+      description: Run flutter analyze in all packages
+      run: melos exec -- flutter analyze
+
+    test:
+      description: Run flutter test in packages that have a test directory
+      run: melos exec --dir-exists="test" -- flutter test
+
+    reinit:
+      description: Clean pub cache, clean melos workspace, bootstrap
+      steps:
+        - flutter pub cache clean -f
+        - dart pub get
+        - dart run melos clean
+        - dart run melos bootstrap

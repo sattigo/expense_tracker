@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:core_failure/core_failure.dart';
 import 'package:core_result/core_result.dart';
 import 'package:feature_expenses/src/domain/models/expense.build.dart';
@@ -20,7 +22,7 @@ void main() {
 
   final testExpense = Expense(
     id: 'test-id-1',
-    amount: 100.0,
+    amount: 100,
     title: 'Test Expense',
     date: DateTime(2026, 4, 28),
     category: ExpenseCategory.food,
@@ -38,8 +40,8 @@ void main() {
     bloc = ExpenseListBloc(getExpensesUseCase: getExpensesUseCase, addExpenseUseCase: addExpenseUseCase);
   });
 
-  tearDown(() {
-    bloc.close();
+  tearDown(() async {
+    await bloc.close();
   });
 
   group('ExpenseListBloc', () {
@@ -55,11 +57,11 @@ void main() {
         ExpenseListState.loaded([testExpense]),
       ];
 
-      expectLater(bloc.stream, emitsInOrder(expectedStates));
+      unawaited(expectLater(bloc.stream, emitsInOrder(expectedStates)));
 
       bloc.add(const ExpenseListEvent.load());
 
-      await Future.delayed(const Duration(milliseconds: 100));
+      await Future<void>.delayed(const Duration(milliseconds: 100));
 
       verify(() => mockRepository.getExpenses()).called(1);
     });
@@ -74,11 +76,11 @@ void main() {
         const ExpenseListState.error('Failed to load expenses'),
       ];
 
-      expectLater(bloc.stream, emitsInOrder(expectedStates));
+      unawaited(expectLater(bloc.stream, emitsInOrder(expectedStates)));
 
       bloc.add(const ExpenseListEvent.load());
 
-      await Future.delayed(const Duration(milliseconds: 100));
+      await Future<void>.delayed(const Duration(milliseconds: 100));
 
       verify(() => mockRepository.getExpenses()).called(1);
     });
@@ -92,11 +94,11 @@ void main() {
         ExpenseListState.loaded([testExpense]),
       ];
 
-      expectLater(bloc.stream, emitsInOrder(expectedStates));
+      unawaited(expectLater(bloc.stream, emitsInOrder(expectedStates)));
 
       bloc.add(ExpenseListEvent.add(testExpense));
 
-      await Future.delayed(const Duration(milliseconds: 100));
+      await Future<void>.delayed(const Duration(milliseconds: 100));
 
       verify(() => mockRepository.addExpense(testExpense)).called(1);
       verify(() => mockRepository.getExpenses()).called(1);
@@ -109,11 +111,11 @@ void main() {
 
       final expectedStates = [const ExpenseListState.error('Failed to add expense')];
 
-      expectLater(bloc.stream, emitsInOrder(expectedStates));
+      unawaited(expectLater(bloc.stream, emitsInOrder(expectedStates)));
 
       bloc.add(ExpenseListEvent.add(testExpense));
 
-      await Future.delayed(const Duration(milliseconds: 100));
+      await Future<void>.delayed(const Duration(milliseconds: 100));
 
       verify(() => mockRepository.addExpense(testExpense)).called(1);
       verifyNever(() => mockRepository.getExpenses());

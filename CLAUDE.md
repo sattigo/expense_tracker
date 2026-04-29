@@ -34,7 +34,7 @@
 | Failure | sealed class из `core_failure` |
 | Result | `Result<S, F>` sealed class из `core_result` |
 | Тесты | `flutter_test` + `bloc_test` + `mocktail` |
-| Менеджер монорепо | `melos` (`6.0.0`, в `dev_dependencies` корневого `pubspec.yaml`) |
+| Менеджер монорепо | `melos` (`7.5.1`, в `dev_dependencies` корневого `pubspec.yaml`) |
 
 ---
 
@@ -120,7 +120,7 @@ BLoC-файлы: `bloc.build.dart`, `event.dart`, `state.dart` — всегда 
 
 ## Команды
 
-Все командные операции над монорепо проходят через Melos. Конфигурация — в корневом `melos.yaml`.
+Все командные операции над монорепо проходят через Melos. Конфигурация — в корневом `pubspec.yaml` под ключом `melos:`.
 
 ```bash
 # Первичная инициализация воркспейса (после клона / смены ветки)

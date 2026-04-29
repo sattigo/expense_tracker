@@ -1,6 +1,6 @@
 import 'package:core_navigation/core_navigation.dart';
-import '../widgets/expense_detail_view.dart';
-import '../widgets/expense_list_view.dart';
+import 'package:feature_expenses/src/ui/widgets/expense_detail_view.dart';
+import 'package:feature_expenses/src/ui/widgets/expense_list_view.dart';
 
 class ExpenseRoutes {
   static List<RouteBase> get routes => [
@@ -13,7 +13,7 @@ class ExpenseRoutes {
           path: 'detail',
           name: Routes.expenseDetail,
           builder: (context, state) {
-            final expenseId = state.extra as String;
+            final expenseId = state.extra! as String;
             return ExpenseDetailView(expenseId: expenseId);
           },
         ),

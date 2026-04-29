@@ -1,9 +1,9 @@
+import 'package:app/src/di/features/expenses_di.dart';
+import 'package:app/src/di/router_di.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'features/expenses_di.dart';
-import 'router_di.dart';
 
-final getIt = GetIt.instance;
+final GetIt getIt = GetIt.instance;
 
 Future<void> setupServiceLocator() async {
   final sharedPreferences = await SharedPreferences.getInstance();
