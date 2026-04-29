@@ -3,9 +3,11 @@ import 'package:core_l10n/core_l10n.dart';
 import 'package:core_navigation/core_navigation.dart';
 import 'package:flutter/material.dart';
 import '../../domain/models/expense.build.dart';
-import '../../domain/models/expense_category.dart';
 import '../../domain/models/expense_type.dart';
 import '../bloc/expense_list_bloc.build.dart';
+import '../utils/category_display.dart';
+import '../utils/category_icon_mapper.dart';
+import '../utils/date_formatter.dart';
 import 'add_expense_bottom_sheet.dart';
 
 class ExpenseListWidget extends StatelessWidget {
@@ -90,11 +92,11 @@ class _ExpenseListItem extends StatelessWidget {
       },
       leading: CircleAvatar(
         backgroundColor: expense.type == ExpenseType.income ? Colors.green : Colors.red,
-        child: Icon(_getCategoryIcon(expense.category), color: Colors.white),
+        child: Icon(getCategoryIcon(expense.category), color: Colors.white),
       ),
       title: Text(expense.title),
       subtitle: Text(
-        '${expense.category.displayName} • ${_formatDate(expense.date)}',
+        '${expense.category.displayName(context)} • ${formatDate(expense.date)}',
         style: Theme.of(context).textTheme.bodySmall,
       ),
       trailing: Text(
@@ -106,20 +108,5 @@ class _ExpenseListItem extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  IconData _getCategoryIcon(ExpenseCategory category) {
-    return switch (category) {
-      ExpenseCategory.food => Icons.restaurant,
-      ExpenseCategory.transport => Icons.directions_car,
-      ExpenseCategory.entertainment => Icons.movie,
-      ExpenseCategory.shopping => Icons.shopping_bag,
-      ExpenseCategory.health => Icons.health_and_safety,
-      ExpenseCategory.other => Icons.category,
-    };
-  }
-
-  String _formatDate(DateTime date) {
-    return '${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year}';
   }
 }

@@ -15,7 +15,8 @@ class SRu extends S {
   String get noExpensesYet => 'Расходов пока нет';
 
   @override
-  String get noExpensesYetAddFirst => 'Расходов пока нет. Добавьте первую транзакцию!';
+  String get noExpensesYetAddFirst =>
+      'Расходов пока нет. Добавьте первую транзакцию!';
 
   @override
   String errorPrefix(String message) {
@@ -66,4 +67,28 @@ class SRu extends S {
 
   @override
   String get transactionId => 'ID транзакции';
+
+  @override
+  String get typeIncome => 'Income';
+
+  @override
+  String get typeExpense => 'Expense';
+
+  @override
+  String get categoryFood => 'Food';
+
+  @override
+  String get categoryTransport => 'Transport';
+
+  @override
+  String get categoryEntertainment => 'Entertainment';
+
+  @override
+  String get categoryShopping => 'Shopping';
+
+  @override
+  String get categoryHealth => 'Health';
+
+  @override
+  String get categoryOther => 'Other';
 }

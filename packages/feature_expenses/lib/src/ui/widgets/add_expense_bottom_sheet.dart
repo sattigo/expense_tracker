@@ -6,6 +6,9 @@ import '../../domain/models/expense.build.dart';
 import '../../domain/models/expense_category.dart';
 import '../../domain/models/expense_type.dart';
 import '../bloc/expense_list_bloc.build.dart';
+import '../utils/category_display.dart';
+import '../utils/date_formatter.dart';
+import '../utils/type_display.dart';
 
 class AddExpenseBottomSheet extends StatefulWidget {
   const AddExpenseBottomSheet({super.key});
@@ -79,7 +82,7 @@ class _AddExpenseBottomSheetState extends State<AddExpenseBottomSheet> {
                 initialValue: _selectedType,
                 decoration: InputDecoration(labelText: l10n.type, border: const OutlineInputBorder()),
                 items: ExpenseType.values.map((type) {
-                  return DropdownMenuItem(value: type, child: Text(type.displayName));
+                  return DropdownMenuItem(value: type, child: Text(type.displayName(context)));
                 }).toList(),
                 onChanged: (value) {
                   if (value != null) {
@@ -92,7 +95,7 @@ class _AddExpenseBottomSheetState extends State<AddExpenseBottomSheet> {
                 initialValue: _selectedCategory,
                 decoration: InputDecoration(labelText: l10n.category, border: const OutlineInputBorder()),
                 items: ExpenseCategory.values.map((category) {
-                  return DropdownMenuItem(value: category, child: Text(category.displayName));
+                  return DropdownMenuItem(value: category, child: Text(category.displayName(context)));
                 }).toList(),
                 onChanged: (value) {
                   if (value != null) {
@@ -104,7 +107,7 @@ class _AddExpenseBottomSheetState extends State<AddExpenseBottomSheet> {
               ListTile(
                 contentPadding: EdgeInsets.zero,
                 title: Text(l10n.date),
-                subtitle: Text(_formatDate(_selectedDate)),
+                subtitle: Text(formatDate(_selectedDate)),
                 trailing: const Icon(Icons.calendar_today),
                 onTap: () async {
                   final picked = await showDatePicker(
@@ -129,10 +132,6 @@ class _AddExpenseBottomSheetState extends State<AddExpenseBottomSheet> {
         ),
       ),
     );
-  }
-
-  String _formatDate(DateTime date) {
-    return '${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year}';
   }
 
   void _onSave() {

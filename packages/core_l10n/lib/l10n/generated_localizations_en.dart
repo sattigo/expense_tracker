@@ -15,7 +15,8 @@ class SEn extends S {
   String get noExpensesYet => 'No expenses yet';
 
   @override
-  String get noExpensesYetAddFirst => 'No expenses yet. Add your first expense!';
+  String get noExpensesYetAddFirst =>
+      'No expenses yet. Add your first expense!';
 
   @override
   String errorPrefix(String message) {
@@ -66,4 +67,28 @@ class SEn extends S {
 
   @override
   String get transactionId => 'Transaction ID';
+
+  @override
+  String get typeIncome => 'Income';
+
+  @override
+  String get typeExpense => 'Expense';
+
+  @override
+  String get categoryFood => 'Food';
+
+  @override
+  String get categoryTransport => 'Transport';
+
+  @override
+  String get categoryEntertainment => 'Entertainment';
+
+  @override
+  String get categoryShopping => 'Shopping';
+
+  @override
+  String get categoryHealth => 'Health';
+
+  @override
+  String get categoryOther => 'Other';
 }

@@ -2,9 +2,12 @@ import 'package:core_bloc/core_bloc.dart';
 import 'package:core_l10n/core_l10n.dart';
 import 'package:flutter/material.dart';
 import '../../domain/models/expense.build.dart';
-import '../../domain/models/expense_category.dart';
 import '../../domain/models/expense_type.dart';
 import '../bloc/expense_detail_bloc.build.dart';
+import '../utils/category_display.dart';
+import '../utils/category_icon_mapper.dart';
+import '../utils/date_formatter.dart';
+import '../utils/type_display.dart';
 
 class ExpenseDetailWidget extends StatelessWidget {
   const ExpenseDetailWidget({super.key});
@@ -57,7 +60,7 @@ class _ExpenseDetailContent extends StatelessWidget {
             child: CircleAvatar(
               radius: 48,
               backgroundColor: expense.type == ExpenseType.income ? Colors.green : Colors.red,
-              child: Icon(_getCategoryIcon(expense.category), size: 48, color: Colors.white),
+              child: Icon(getCategoryIcon(expense.category), size: 48, color: Colors.white),
             ),
           ),
           const SizedBox(height: 24),
@@ -74,31 +77,16 @@ class _ExpenseDetailContent extends StatelessWidget {
           const SizedBox(height: 32),
           _DetailRow(label: l10n.title, value: expense.title),
           const Divider(),
-          _DetailRow(label: l10n.type, value: expense.type.displayName),
+          _DetailRow(label: l10n.type, value: expense.type.displayName(context)),
           const Divider(),
-          _DetailRow(label: l10n.category, value: expense.category.displayName),
+          _DetailRow(label: l10n.category, value: expense.category.displayName(context)),
           const Divider(),
-          _DetailRow(label: l10n.date, value: _formatDate(expense.date)),
+          _DetailRow(label: l10n.date, value: formatDate(expense.date)),
           const Divider(),
           _DetailRow(label: l10n.transactionId, value: expense.id),
         ],
       ),
     );
-  }
-
-  IconData _getCategoryIcon(ExpenseCategory category) {
-    return switch (category) {
-      ExpenseCategory.food => Icons.restaurant,
-      ExpenseCategory.transport => Icons.directions_car,
-      ExpenseCategory.entertainment => Icons.movie,
-      ExpenseCategory.shopping => Icons.shopping_bag,
-      ExpenseCategory.health => Icons.health_and_safety,
-      ExpenseCategory.other => Icons.category,
-    };
-  }
-
-  String _formatDate(DateTime date) {
-    return '${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year}';
   }
 }
 

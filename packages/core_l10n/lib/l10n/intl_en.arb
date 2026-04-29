@@ -81,5 +81,37 @@
   "transactionId": "Transaction ID",
   "@transactionId": {
     "description": "Transaction ID field label"
+  },
+  "typeIncome": "Income",
+  "@typeIncome": {
+    "description": "Income type label"
+  },
+  "typeExpense": "Expense",
+  "@typeExpense": {
+    "description": "Expense type label"
+  },
+  "categoryFood": "Food",
+  "@categoryFood": {
+    "description": "Food category label"
+  },
+  "categoryTransport": "Transport",
+  "@categoryTransport": {
+    "description": "Transport category label"
+  },
+  "categoryEntertainment": "Entertainment",
+  "@categoryEntertainment": {
+    "description": "Entertainment category label"
+  },
+  "categoryShopping": "Shopping",
+  "@categoryShopping": {
+    "description": "Shopping category label"
+  },
+  "categoryHealth": "Health",
+  "@categoryHealth": {
+    "description": "Health category label"
+  },
+  "categoryOther": "Other",
+  "@categoryOther": {
+    "description": "Other category label"
   }
 }
