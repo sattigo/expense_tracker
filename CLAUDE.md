@@ -34,6 +34,7 @@
 | Failure | sealed class из `core_failure` |
 | Result | `Result<S, F>` sealed class из `core_result` |
 | Тесты | `flutter_test` + `bloc_test` + `mocktail` |
+| Менеджер монорепо | `melos` (`6.0.0`, в `dev_dependencies` корневого `pubspec.yaml`) |
 
 ---
 
@@ -119,20 +120,37 @@ BLoC-файлы: `bloc.build.dart`, `event.dart`, `state.dart` — всегда 
 
 ## Команды
 
+Все командные операции над монорепо проходят через Melos. Конфигурация — в корневом `melos.yaml`.
+
 ```bash
-# Кодогенерация (обрабатывает только **.build.dart — намеренно)
-dart run build_runner build --delete-conflicting-outputs
+# Первичная инициализация воркспейса (после клона / смены ветки)
+dart run melos bootstrap
 
-# Форматирование (длина строки 120 — стандарт проекта)
-dart format --line-length 120 lib/
+# Форматирование всех .dart файлов (исключая *.g.dart и *.freezed.dart),
+# длина строки 120 — стандарт проекта
+dart run melos run format
 
-# Анализ
-flutter analyze
+# Кодогенерация: build_runner запускается ТОЛЬКО в пакетах,
+# зависящих от build_runner (фильтр --depends-on)
+dart run melos run gen
 
-# Тесты
-flutter test
-flutter test test/unit/features/expenses/bloc/expense_bloc_test.dart
+# Статический анализ всех пакетов
+dart run melos run analyze
+
+# Тесты — только в пакетах с папкой test/
+dart run melos run test
+
+# Полная переинициализация: pub cache clean → melos clean → melos bootstrap
+dart run melos run reinit
+```
+
+Точечные запуски (без Melos), когда нужен один файл/тест:
+
+```bash
+flutter test packages/feature_expenses/test/unit/.../expense_bloc_test.dart
 flutter test --name "emits loading"
 ```
 
 Тесты в пакетах: `<package>/test/unit/` и `<package>/test/widget/`.
+
+`pubspec.lock` отдельных пакетов в `packages/` не трекается (см. `.gitignore`) — трекается только корневой `pubspec.lock`.

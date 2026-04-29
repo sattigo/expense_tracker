@@ -57,7 +57,7 @@ packages:
     source: path
     version: "1.0.0"
   core_failure:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       path: "../core_failure"
       relative: true
@@ -78,7 +78,7 @@ packages:
     source: path
     version: "1.0.0"
   core_result:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       path: "../core_result"
       relative: true

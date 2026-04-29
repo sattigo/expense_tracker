@@ -15,8 +15,7 @@ class SEn extends S {
   String get noExpensesYet => 'No expenses yet';
 
   @override
-  String get noExpensesYetAddFirst =>
-      'No expenses yet. Add your first expense!';
+  String get noExpensesYetAddFirst => 'No expenses yet. Add your first expense!';
 
   @override
   String errorPrefix(String message) {
