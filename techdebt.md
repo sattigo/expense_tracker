@@ -1,6 +1,6 @@
 # Tech Debt — Expense Tracker MVP
 
-## Статус: CHANGES REQUIRED (итерация 2/3)
+## Статус: APPROVED ✅ (итерация 3/3)
 
 Ветка: `feature/expense-tracker-mvp`
 
@@ -31,7 +31,7 @@ packages/
 ├── core_failure/         # Failure sealed class
 ├── core_result/          # Result<S, F> sealed class
 ├── core_navigation/      # AppRouter, AppGoRoute, Routes
-├── core_l10n/            # Локализация (en, ru) — 19 ключей
+├── core_l10n/            # Локализация (en, ru)
 └── feature_expenses/     # Фича с полной Clean Architecture
 ```
 
@@ -43,54 +43,37 @@ packages/
 5. `fix(app): remove redundant MultiBlocProvider`
 6. `fix(feature_expenses): add missing get_it dependency`
 7. `fix(feature_expenses): replace hardcoded strings with l10n`
+8. `fix(feature_expenses): extract UI utils and remove domain displayName`
 
 ---
 
-## Блокеры (не исправлены)
+## Блокеры — все устранены ✅
 
-### 1. Хардкод UI-строк в domain-слое
+### 1. ~~Хардкод UI-строк в domain-слое~~ → Исправлено (итерация 3)
 
-**Файлы:**
-- `/Users/sattigo/expense_tracker/packages/feature_expenses/lib/src/domain/models/expense_category.dart` (строки 9-18)
-- `/Users/sattigo/expense_tracker/packages/feature_expenses/lib/src/domain/models/expense_type.dart` (строки 5-10)
+- Удалены методы `displayName` из enum `ExpenseCategory` и `ExpenseType`
+- Созданы UI extensions: `ExpenseCategoryDisplay`, `ExpenseTypeDisplay` с локализацией через `S.of(context)`
+- Добавлены l10n ключи: `typeIncome`, `typeExpense`, `categoryFood`, `categoryTransport`, `categoryEntertainment`, `categoryShopping`, `categoryHealth`, `categoryOther`
 
-**Проблема:** Методы `displayName` в enum `ExpenseCategory` и `ExpenseType` возвращают хардкод английские строки.
+### 2. ~~Дублирование логики (DRY)~~ → Исправлено (итерация 3)
 
-**Нарушения:**
-- "Локализация только через S.of(context).* — никаких хардкод строк в UI"
-- Clean Architecture: domain-слой не должен знать про UI-представление
-
-**Решение:** Убрать `displayName` из domain-моделей, добавить extension на UI-слое с локализацией через `S.of(context)` или создать маппер в UI-слое.
+- Создана утилита `lib/src/ui/utils/category_icon_mapper.dart` — функция `getCategoryIcon`
+- Создана утилита `lib/src/ui/utils/date_formatter.dart` — функция `formatDate`
+- Дублированные private-методы удалены из всех виджетов
 
 ---
 
-### 2. Дублирование логики (нарушение DRY)
+## Замечания (не блокируют, можно улучшить позже)
 
-**Проблема:** Методы `_getCategoryIcon` и `_formatDate` дублируются в нескольких виджетах.
-
-**Затронутые файлы:**
-- `expense_list_widget.dart` (строки 111-120, 122-124)
-- `expense_detail_widget.dart` (строки 89-98, 100-102)
-- `add_expense_bottom_sheet.dart` (строки 134-136)
-
-**Решение:** Вынести в отдельные утилиты:
-- `lib/src/ui/utils/category_icon_mapper.dart`
-- `lib/src/ui/utils/date_formatter.dart`
-
-Или создать extension methods.
-
----
-
-## Замечания (не блокируют)
-
-1. **Стилистическое несоответствие GetIt** — в View используется `GetIt.I<Bloc>()`, в DI используется `getIt`. Желательно унифицировать.
-
-2. **Форматирование суммы** — `\$${expense.amount.toStringAsFixed(2)}` в виджетах можно вынести в утилиту для единообразия.
+1. **Формат даты** — `formatDate` использует хардкод `dd.MM.yyyy`. Можно добавить локализованное форматирование через `intl`.
+2. **Валидация формы** — захардкожена в `AddExpenseBottomSheet`. При росте проекта вынести в отдельные валидаторы.
+3. **Стиль GetIt** — в View используется `GetIt.I<Bloc>()`, в DI — `getIt`. Желательно унифицировать.
+4. **Форматирование суммы** — `\$${expense.amount.toStringAsFixed(2)}` можно вынести в утилиту.
 
 ---
 
 ## Следующие шаги
 
-1. Передать блокеры разработчику
-2. Запустить финальное ревью (итерация 3/3)
-3. После APPROVED — мерж в main
+1. ~~Передать блокеры разработчику~~ ✅
+2. ~~Запустить финальное ревью (итерация 3/3)~~ ✅ APPROVED
+3. Создать PR и смержить в main

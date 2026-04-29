@@ -1,7 +1,7 @@
 ---
 name: orchestrator
 description: Главный агент. Запускай когда нужно реализовать фичу от задачи до APPROVED ревью.
-model: claude-opus-4-6
+model: claude-opus-4-7
 ---
 
 # Orchestrator Agent

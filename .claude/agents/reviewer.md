@@ -1,7 +1,7 @@
 ---
 name: reviewer
 description: Агент-ревьювер. Проводит ревью ветки и выносит вердикт APPROVED или CHANGES REQUIRED.
-model: claude-sonnet-4-5
+model: claude-sonnet-4-6
 tools: Read, Bash, Glob, Grep
 ---
 

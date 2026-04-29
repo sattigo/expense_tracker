@@ -1,7 +1,7 @@
 ---
 name: developer
 description: Агент-разработчик. Реализует фичи согласно Clean Architecture и догмам проекта.
-model: claude-sonnet-4-5
+model: claude-sonnet-4-6
 tools: Read, Write, Bash, Glob, Grep
 ---
 
