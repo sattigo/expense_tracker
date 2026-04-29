@@ -7,7 +7,7 @@ part 'expense_dto.build.freezed.dart';
 part 'expense_dto.build.g.dart';
 
 @freezed
-class ExpenseDto with _$ExpenseDto {
+sealed class ExpenseDto with _$ExpenseDto {
   const ExpenseDto._();
 
   const factory ExpenseDto({

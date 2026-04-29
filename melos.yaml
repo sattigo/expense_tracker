@@ -32,5 +32,6 @@ scripts:
     description: Clean pub cache, clean melos workspace, bootstrap
     steps:
       - flutter pub cache clean -f
-      - melos clean
-      - melos bootstrap
+      - dart pub get
+      - dart run melos clean
+      - dart run melos bootstrap

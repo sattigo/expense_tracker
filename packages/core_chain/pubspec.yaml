@@ -6,6 +6,8 @@ publish_to: none
 environment:
   sdk: ">=3.11.1 <4.0.0"
 
+resolution: workspace
+
 dependencies:
   core_result:
     path: ../core_result

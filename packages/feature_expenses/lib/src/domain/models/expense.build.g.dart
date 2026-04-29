@@ -6,7 +6,7 @@ part of 'expense.build.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ExpenseImpl _$$ExpenseImplFromJson(Map<String, dynamic> json) => _$ExpenseImpl(
+_Expense _$ExpenseFromJson(Map<String, dynamic> json) => _Expense(
   id: json['id'] as String,
   amount: (json['amount'] as num).toDouble(),
   title: json['title'] as String,
@@ -15,7 +15,7 @@ _$ExpenseImpl _$$ExpenseImplFromJson(Map<String, dynamic> json) => _$ExpenseImpl
   type: $enumDecode(_$ExpenseTypeEnumMap, json['type']),
 );
 
-Map<String, dynamic> _$$ExpenseImplToJson(_$ExpenseImpl instance) => <String, dynamic>{
+Map<String, dynamic> _$ExpenseToJson(_Expense instance) => <String, dynamic>{
   'id': instance.id,
   'amount': instance.amount,
   'title': instance.title,
@@ -33,4 +33,7 @@ const _$ExpenseCategoryEnumMap = {
   ExpenseCategory.other: 'other',
 };
 
-const _$ExpenseTypeEnumMap = {ExpenseType.income: 'income', ExpenseType.expense: 'expense'};
+const _$ExpenseTypeEnumMap = {
+  ExpenseType.income: 'income',
+  ExpenseType.expense: 'expense',
+};
