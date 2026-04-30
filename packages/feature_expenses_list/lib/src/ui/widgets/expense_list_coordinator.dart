@@ -43,8 +43,7 @@ class _ExpenseListCoordinatorState extends State<ExpenseListCoordinator> {
           showModalBottomSheet<void>(
             context: context,
             isScrollControlled: true,
-            builder: (bottomSheetContext) =>
-                BlocProvider.value(value: bloc, child: const AddExpenseBottomSheet()),
+            builder: (bottomSheetContext) => BlocProvider.value(value: bloc, child: const AddExpenseBottomSheet()),
           ),
         );
       case CloseAddExpenseForm():
