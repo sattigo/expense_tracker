@@ -90,3 +90,10 @@ pubspec_overrides.yaml
 
 # Lock files of internal packages — only root pubspec.lock is tracked
 packages/**/pubspec.lock
+
+# Build runner artifacts (json_serializable and freezed)
+*.build.g.dart
+*.build.freezed.dart
+
+# flutter gen-l10n artifacts
+packages/core_l10n/lib/l10n/generated_localizations*.dart
