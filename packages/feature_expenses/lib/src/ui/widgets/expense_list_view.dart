@@ -1,7 +1,7 @@
-import 'package:core_bloc/core_bloc.dart';
 import 'package:feature_expenses/src/ui/bloc/expense_list_bloc.build.dart';
 import 'package:feature_expenses/src/ui/widgets/expense_list_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 class ExpenseListView extends StatelessWidget {

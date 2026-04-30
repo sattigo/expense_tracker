@@ -9,7 +9,7 @@ part 'expense_list_event.dart';
 part 'expense_list_state.dart';
 part 'expense_list_bloc.build.freezed.dart';
 
-class ExpenseListBloc extends BaseBloc<ExpenseListEvent, ExpenseListState> {
+class ExpenseListBloc extends BaseBloc<ExpenseListEvent, ExpenseListState, void> {
   ExpenseListBloc({required GetExpensesUseCase getExpensesUseCase, required AddExpenseUseCase addExpenseUseCase})
     : _getExpensesUseCase = getExpensesUseCase,
       _addExpenseUseCase = addExpenseUseCase,

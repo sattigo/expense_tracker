@@ -207,8 +207,8 @@ return $default(_that.id,_that.amount,_that.title,_that.date,_that.category,_tha
 /// @nodoc
 @JsonSerializable()
 
-class _ExpenseDto extends ExpenseDto {
-  const _ExpenseDto({required this.id, required this.amount, required this.title, required this.date, required this.category, required this.type}): super._();
+class _ExpenseDto implements ExpenseDto {
+  const _ExpenseDto({required this.id, required this.amount, required this.title, required this.date, required this.category, required this.type});
   factory _ExpenseDto.fromJson(Map<String, dynamic> json) => _$ExpenseDtoFromJson(json);
 
 @override final  String id;

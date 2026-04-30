@@ -8,6 +8,5 @@ class AddExpenseUseCase {
 
   final ExpenseRepository _repository;
 
-  Future<Result<void, AppFailure>> call(Expense expense) =>
-      _repository.addExpense(expense);
+  Future<Result<void, AppFailure>> call(Expense expense) => _repository.addExpense(expense);
 }

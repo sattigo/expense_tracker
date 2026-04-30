@@ -8,6 +8,5 @@ class GetExpenseByIdUseCase {
 
   final ExpenseRepository _repository;
 
-  Future<Result<Expense, AppFailure>> call(String id) =>
-      _repository.getExpenseById(id);
+  Future<Result<Expense, AppFailure>> call(String id) => _repository.getExpenseById(id);
 }
