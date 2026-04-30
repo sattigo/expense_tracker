@@ -8,6 +8,5 @@ class GetExpensesUseCase {
 
   final ExpenseRepository _repository;
 
-  Future<Result<List<Expense>, AppFailure>> call() =>
-      _repository.getExpenses();
+  Future<Result<List<Expense>, AppFailure>> call() => _repository.getExpenses();
 }

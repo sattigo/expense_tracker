@@ -15,8 +15,7 @@ class SRu extends S {
   String get noExpensesYet => 'Расходов пока нет';
 
   @override
-  String get noExpensesYetAddFirst =>
-      'Расходов пока нет. Добавьте первую транзакцию!';
+  String get noExpensesYetAddFirst => 'Расходов пока нет. Добавьте первую транзакцию!';
 
   @override
   String errorPrefix(String message) {

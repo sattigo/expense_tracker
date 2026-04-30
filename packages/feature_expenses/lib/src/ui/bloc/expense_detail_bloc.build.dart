@@ -8,7 +8,7 @@ part 'expense_detail_event.dart';
 part 'expense_detail_state.dart';
 part 'expense_detail_bloc.build.freezed.dart';
 
-class ExpenseDetailBloc extends BaseBloc<ExpenseDetailEvent, ExpenseDetailState> {
+class ExpenseDetailBloc extends BaseBloc<ExpenseDetailEvent, ExpenseDetailState, void> {
   ExpenseDetailBloc({required GetExpenseByIdUseCase getExpenseByIdUseCase})
     : _getExpenseByIdUseCase = getExpenseByIdUseCase,
       super(const ExpenseDetailState.initial()) {
