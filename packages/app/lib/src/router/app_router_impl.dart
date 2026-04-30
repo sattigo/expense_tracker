@@ -7,10 +7,7 @@ class AppRouterImpl implements AppRouter {
 
   @override
   late final GoRouter router = GoRouter(
-    routes: [
-      ...ExpenseListRoute.routes,
-      ...ExpenseDetailRoute.routes,
-    ],
+    routes: [...ExpenseListRoute.routes, ...ExpenseDetailRoute.routes],
     initialLocation: '/',
   );
 }

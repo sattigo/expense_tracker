@@ -144,7 +144,6 @@ class _AddExpenseBottomSheetState extends State<AddExpenseBottomSheet> {
       );
 
       context.read<ExpenseListBloc>().add(ExpenseListEvent.add(expense));
-      Navigator.of(context).pop();
     }
   }
 }

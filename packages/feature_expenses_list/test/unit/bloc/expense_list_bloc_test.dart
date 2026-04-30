@@ -117,5 +117,32 @@ void main() {
       verify(() => mockRepository.addExpense(testExpense)).called(1);
       verifyNever(() => mockRepository.getExpenses());
     });
+
+    test('emits openAddExpenseForm action when RequestAddExpense is added', () async {
+      unawaited(expectLater(bloc.actions, emits(const ExpenseListAction.openAddExpenseForm())));
+
+      bloc.add(const ExpenseListEvent.requestAddExpense());
+
+      await Future<void>.delayed(const Duration(milliseconds: 100));
+    });
+
+    test('emits openDetail action when openDetail event is added', () async {
+      unawaited(expectLater(bloc.actions, emits(const ExpenseListAction.openDetail('test-id-1'))));
+
+      bloc.add(const ExpenseListEvent.openDetail('test-id-1'));
+
+      await Future<void>.delayed(const Duration(milliseconds: 100));
+    });
+
+    test('emits closeAddExpenseForm action when AddExpense succeeds', () async {
+      when(() => mockRepository.addExpense(any())).thenAnswer((_) async => const Success(null));
+      when(() => mockRepository.getExpenses()).thenAnswer((_) async => Success([testExpense]));
+
+      unawaited(expectLater(bloc.actions, emits(const ExpenseListAction.closeAddExpenseForm())));
+
+      bloc.add(ExpenseListEvent.add(testExpense));
+
+      await Future<void>.delayed(const Duration(milliseconds: 100));
+    });
   });
 }

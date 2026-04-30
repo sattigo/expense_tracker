@@ -30,7 +30,10 @@ class ExpenseDetailWidget extends StatelessWidget {
                 children: [
                   Text(l10n.errorPrefix(message)),
                   const SizedBox(height: 16),
-                  ElevatedButton(onPressed: () => Navigator.of(context).pop(), child: Text(l10n.goBack)),
+                  ElevatedButton(
+                    onPressed: () => context.read<ExpenseDetailBloc>().add(const ExpenseDetailEvent.requestGoBack()),
+                    child: Text(l10n.goBack),
+                  ),
                 ],
               ),
             ),
