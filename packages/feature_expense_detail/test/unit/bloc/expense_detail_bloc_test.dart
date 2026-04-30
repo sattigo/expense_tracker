@@ -84,5 +84,13 @@ void main() {
 
       verify(() => mockRepository.getExpenseById('invalid-id')).called(1);
     });
+
+    test('emits goBack action when RequestGoBack is added', () async {
+      unawaited(expectLater(bloc.actions, emits(const ExpenseDetailAction.goBack())));
+
+      bloc.add(const ExpenseDetailEvent.requestGoBack());
+
+      await Future<void>.delayed(const Duration(milliseconds: 100));
+    });
   });
 }

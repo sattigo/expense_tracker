@@ -12,68 +12,37 @@ part of 'bloc.build.dart';
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
-mixin _$ExpenseDetailEvent {
+mixin _$ExpenseDetailAction {
 
- String get id;
-/// Create a copy of ExpenseDetailEvent
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$ExpenseDetailEventCopyWith<ExpenseDetailEvent> get copyWith => _$ExpenseDetailEventCopyWithImpl<ExpenseDetailEvent>(this as ExpenseDetailEvent, _$identity);
+
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ExpenseDetailEvent&&(identical(other.id, id) || other.id == id));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ExpenseDetailAction);
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id);
+int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'ExpenseDetailEvent(id: $id)';
+  return 'ExpenseDetailAction()';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $ExpenseDetailEventCopyWith<$Res>  {
-  factory $ExpenseDetailEventCopyWith(ExpenseDetailEvent value, $Res Function(ExpenseDetailEvent) _then) = _$ExpenseDetailEventCopyWithImpl;
-@useResult
-$Res call({
- String id
-});
-
-
-
-
-}
-/// @nodoc
-class _$ExpenseDetailEventCopyWithImpl<$Res>
-    implements $ExpenseDetailEventCopyWith<$Res> {
-  _$ExpenseDetailEventCopyWithImpl(this._self, this._then);
-
-  final ExpenseDetailEvent _self;
-  final $Res Function(ExpenseDetailEvent) _then;
-
-/// Create a copy of ExpenseDetailEvent
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,}) {
-  return _then(_self.copyWith(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,
-  ));
-}
-
+class $ExpenseDetailActionCopyWith<$Res>  {
+$ExpenseDetailActionCopyWith(ExpenseDetailAction _, $Res Function(ExpenseDetailAction) __);
 }
 
 
-/// Adds pattern-matching-related methods to [ExpenseDetailEvent].
-extension ExpenseDetailEventPatterns on ExpenseDetailEvent {
+/// Adds pattern-matching-related methods to [ExpenseDetailAction].
+extension ExpenseDetailActionPatterns on ExpenseDetailAction {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -86,11 +55,11 @@ extension ExpenseDetailEventPatterns on ExpenseDetailEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( LoadExpenseDetail value)?  load,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( GoBack value)?  goBack,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case LoadExpenseDetail() when load != null:
-return load(_that);case _:
+case GoBack() when goBack != null:
+return goBack(_that);case _:
   return orElse();
 
 }
@@ -108,11 +77,11 @@ return load(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( LoadExpenseDetail value)  load,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( GoBack value)  goBack,}){
 final _that = this;
 switch (_that) {
-case LoadExpenseDetail():
-return load(_that);}
+case GoBack():
+return goBack(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -126,11 +95,11 @@ return load(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( LoadExpenseDetail value)?  load,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( GoBack value)?  goBack,}){
 final _that = this;
 switch (_that) {
-case LoadExpenseDetail() when load != null:
-return load(_that);case _:
+case GoBack() when goBack != null:
+return goBack(_that);case _:
   return null;
 
 }
@@ -147,10 +116,10 @@ return load(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String id)?  load,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  goBack,required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case LoadExpenseDetail() when load != null:
-return load(_that.id);case _:
+case GoBack() when goBack != null:
+return goBack();case _:
   return orElse();
 
 }
@@ -168,10 +137,10 @@ return load(_that.id);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String id)  load,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  goBack,}) {final _that = this;
 switch (_that) {
-case LoadExpenseDetail():
-return load(_that.id);}
+case GoBack():
+return goBack();}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -185,10 +154,202 @@ return load(_that.id);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String id)?  load,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  goBack,}) {final _that = this;
+switch (_that) {
+case GoBack() when goBack != null:
+return goBack();case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+
+
+class GoBack implements ExpenseDetailAction {
+  const GoBack();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GoBack);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'ExpenseDetailAction.goBack()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+mixin _$ExpenseDetailEvent {
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ExpenseDetailEvent);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'ExpenseDetailEvent()';
+}
+
+
+}
+
+/// @nodoc
+class $ExpenseDetailEventCopyWith<$Res>  {
+$ExpenseDetailEventCopyWith(ExpenseDetailEvent _, $Res Function(ExpenseDetailEvent) __);
+}
+
+
+/// Adds pattern-matching-related methods to [ExpenseDetailEvent].
+extension ExpenseDetailEventPatterns on ExpenseDetailEvent {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( LoadExpenseDetail value)?  load,TResult Function( RequestGoBack value)?  requestGoBack,required TResult orElse(),}){
+final _that = this;
 switch (_that) {
 case LoadExpenseDetail() when load != null:
-return load(_that.id);case _:
+return load(_that);case RequestGoBack() when requestGoBack != null:
+return requestGoBack(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( LoadExpenseDetail value)  load,required TResult Function( RequestGoBack value)  requestGoBack,}){
+final _that = this;
+switch (_that) {
+case LoadExpenseDetail():
+return load(_that);case RequestGoBack():
+return requestGoBack(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( LoadExpenseDetail value)?  load,TResult? Function( RequestGoBack value)?  requestGoBack,}){
+final _that = this;
+switch (_that) {
+case LoadExpenseDetail() when load != null:
+return load(_that);case RequestGoBack() when requestGoBack != null:
+return requestGoBack(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String id)?  load,TResult Function()?  requestGoBack,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case LoadExpenseDetail() when load != null:
+return load(_that.id);case RequestGoBack() when requestGoBack != null:
+return requestGoBack();case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String id)  load,required TResult Function()  requestGoBack,}) {final _that = this;
+switch (_that) {
+case LoadExpenseDetail():
+return load(_that.id);case RequestGoBack():
+return requestGoBack();}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String id)?  load,TResult? Function()?  requestGoBack,}) {final _that = this;
+switch (_that) {
+case LoadExpenseDetail() when load != null:
+return load(_that.id);case RequestGoBack() when requestGoBack != null:
+return requestGoBack();case _:
   return null;
 
 }
@@ -203,11 +364,11 @@ class LoadExpenseDetail implements ExpenseDetailEvent {
   const LoadExpenseDetail(this.id);
   
 
-@override final  String id;
+ final  String id;
 
 /// Create a copy of ExpenseDetailEvent
 /// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
+@JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $LoadExpenseDetailCopyWith<LoadExpenseDetail> get copyWith => _$LoadExpenseDetailCopyWithImpl<LoadExpenseDetail>(this, _$identity);
 
@@ -233,7 +394,7 @@ String toString() {
 /// @nodoc
 abstract mixin class $LoadExpenseDetailCopyWith<$Res> implements $ExpenseDetailEventCopyWith<$Res> {
   factory $LoadExpenseDetailCopyWith(LoadExpenseDetail value, $Res Function(LoadExpenseDetail) _then) = _$LoadExpenseDetailCopyWithImpl;
-@override @useResult
+@useResult
 $Res call({
  String id
 });
@@ -252,7 +413,7 @@ class _$LoadExpenseDetailCopyWithImpl<$Res>
 
 /// Create a copy of ExpenseDetailEvent
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? id = null,}) {
   return _then(LoadExpenseDetail(
 null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,
@@ -261,6 +422,38 @@ as String,
 
 
 }
+
+/// @nodoc
+
+
+class RequestGoBack implements ExpenseDetailEvent {
+  const RequestGoBack();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RequestGoBack);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'ExpenseDetailEvent.requestGoBack()';
+}
+
+
+}
+
+
+
 
 /// @nodoc
 mixin _$ExpenseDetailState {

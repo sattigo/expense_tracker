@@ -12,6 +12,302 @@ part of 'bloc.build.dart';
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
+mixin _$ExpenseListAction {
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ExpenseListAction);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'ExpenseListAction()';
+}
+
+
+}
+
+/// @nodoc
+class $ExpenseListActionCopyWith<$Res>  {
+$ExpenseListActionCopyWith(ExpenseListAction _, $Res Function(ExpenseListAction) __);
+}
+
+
+/// Adds pattern-matching-related methods to [ExpenseListAction].
+extension ExpenseListActionPatterns on ExpenseListAction {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( OpenDetail value)?  openDetail,TResult Function( OpenAddExpenseForm value)?  openAddExpenseForm,TResult Function( CloseAddExpenseForm value)?  closeAddExpenseForm,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case OpenDetail() when openDetail != null:
+return openDetail(_that);case OpenAddExpenseForm() when openAddExpenseForm != null:
+return openAddExpenseForm(_that);case CloseAddExpenseForm() when closeAddExpenseForm != null:
+return closeAddExpenseForm(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( OpenDetail value)  openDetail,required TResult Function( OpenAddExpenseForm value)  openAddExpenseForm,required TResult Function( CloseAddExpenseForm value)  closeAddExpenseForm,}){
+final _that = this;
+switch (_that) {
+case OpenDetail():
+return openDetail(_that);case OpenAddExpenseForm():
+return openAddExpenseForm(_that);case CloseAddExpenseForm():
+return closeAddExpenseForm(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( OpenDetail value)?  openDetail,TResult? Function( OpenAddExpenseForm value)?  openAddExpenseForm,TResult? Function( CloseAddExpenseForm value)?  closeAddExpenseForm,}){
+final _that = this;
+switch (_that) {
+case OpenDetail() when openDetail != null:
+return openDetail(_that);case OpenAddExpenseForm() when openAddExpenseForm != null:
+return openAddExpenseForm(_that);case CloseAddExpenseForm() when closeAddExpenseForm != null:
+return closeAddExpenseForm(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String expenseId)?  openDetail,TResult Function()?  openAddExpenseForm,TResult Function()?  closeAddExpenseForm,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case OpenDetail() when openDetail != null:
+return openDetail(_that.expenseId);case OpenAddExpenseForm() when openAddExpenseForm != null:
+return openAddExpenseForm();case CloseAddExpenseForm() when closeAddExpenseForm != null:
+return closeAddExpenseForm();case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String expenseId)  openDetail,required TResult Function()  openAddExpenseForm,required TResult Function()  closeAddExpenseForm,}) {final _that = this;
+switch (_that) {
+case OpenDetail():
+return openDetail(_that.expenseId);case OpenAddExpenseForm():
+return openAddExpenseForm();case CloseAddExpenseForm():
+return closeAddExpenseForm();}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String expenseId)?  openDetail,TResult? Function()?  openAddExpenseForm,TResult? Function()?  closeAddExpenseForm,}) {final _that = this;
+switch (_that) {
+case OpenDetail() when openDetail != null:
+return openDetail(_that.expenseId);case OpenAddExpenseForm() when openAddExpenseForm != null:
+return openAddExpenseForm();case CloseAddExpenseForm() when closeAddExpenseForm != null:
+return closeAddExpenseForm();case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+
+
+class OpenDetail implements ExpenseListAction {
+  const OpenDetail(this.expenseId);
+  
+
+ final  String expenseId;
+
+/// Create a copy of ExpenseListAction
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$OpenDetailCopyWith<OpenDetail> get copyWith => _$OpenDetailCopyWithImpl<OpenDetail>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is OpenDetail&&(identical(other.expenseId, expenseId) || other.expenseId == expenseId));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,expenseId);
+
+@override
+String toString() {
+  return 'ExpenseListAction.openDetail(expenseId: $expenseId)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $OpenDetailCopyWith<$Res> implements $ExpenseListActionCopyWith<$Res> {
+  factory $OpenDetailCopyWith(OpenDetail value, $Res Function(OpenDetail) _then) = _$OpenDetailCopyWithImpl;
+@useResult
+$Res call({
+ String expenseId
+});
+
+
+
+
+}
+/// @nodoc
+class _$OpenDetailCopyWithImpl<$Res>
+    implements $OpenDetailCopyWith<$Res> {
+  _$OpenDetailCopyWithImpl(this._self, this._then);
+
+  final OpenDetail _self;
+  final $Res Function(OpenDetail) _then;
+
+/// Create a copy of ExpenseListAction
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? expenseId = null,}) {
+  return _then(OpenDetail(
+null == expenseId ? _self.expenseId : expenseId // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class OpenAddExpenseForm implements ExpenseListAction {
+  const OpenAddExpenseForm();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is OpenAddExpenseForm);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'ExpenseListAction.openAddExpenseForm()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class CloseAddExpenseForm implements ExpenseListAction {
+  const CloseAddExpenseForm();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CloseAddExpenseForm);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'ExpenseListAction.closeAddExpenseForm()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
 mixin _$ExpenseListEvent {
 
 
@@ -55,12 +351,14 @@ extension ExpenseListEventPatterns on ExpenseListEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( LoadExpenses value)?  load,TResult Function( AddExpense value)?  add,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( LoadExpenses value)?  load,TResult Function( AddExpense value)?  add,TResult Function( RequestAddExpense value)?  requestAddExpense,TResult Function( OpenDetailEvent value)?  openDetail,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case LoadExpenses() when load != null:
 return load(_that);case AddExpense() when add != null:
-return add(_that);case _:
+return add(_that);case RequestAddExpense() when requestAddExpense != null:
+return requestAddExpense(_that);case OpenDetailEvent() when openDetail != null:
+return openDetail(_that);case _:
   return orElse();
 
 }
@@ -78,12 +376,14 @@ return add(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( LoadExpenses value)  load,required TResult Function( AddExpense value)  add,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( LoadExpenses value)  load,required TResult Function( AddExpense value)  add,required TResult Function( RequestAddExpense value)  requestAddExpense,required TResult Function( OpenDetailEvent value)  openDetail,}){
 final _that = this;
 switch (_that) {
 case LoadExpenses():
 return load(_that);case AddExpense():
-return add(_that);}
+return add(_that);case RequestAddExpense():
+return requestAddExpense(_that);case OpenDetailEvent():
+return openDetail(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -97,12 +397,14 @@ return add(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( LoadExpenses value)?  load,TResult? Function( AddExpense value)?  add,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( LoadExpenses value)?  load,TResult? Function( AddExpense value)?  add,TResult? Function( RequestAddExpense value)?  requestAddExpense,TResult? Function( OpenDetailEvent value)?  openDetail,}){
 final _that = this;
 switch (_that) {
 case LoadExpenses() when load != null:
 return load(_that);case AddExpense() when add != null:
-return add(_that);case _:
+return add(_that);case RequestAddExpense() when requestAddExpense != null:
+return requestAddExpense(_that);case OpenDetailEvent() when openDetail != null:
+return openDetail(_that);case _:
   return null;
 
 }
@@ -119,11 +421,13 @@ return add(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  load,TResult Function( Expense expense)?  add,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  load,TResult Function( Expense expense)?  add,TResult Function()?  requestAddExpense,TResult Function( String expenseId)?  openDetail,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case LoadExpenses() when load != null:
 return load();case AddExpense() when add != null:
-return add(_that.expense);case _:
+return add(_that.expense);case RequestAddExpense() when requestAddExpense != null:
+return requestAddExpense();case OpenDetailEvent() when openDetail != null:
+return openDetail(_that.expenseId);case _:
   return orElse();
 
 }
@@ -141,11 +445,13 @@ return add(_that.expense);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  load,required TResult Function( Expense expense)  add,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  load,required TResult Function( Expense expense)  add,required TResult Function()  requestAddExpense,required TResult Function( String expenseId)  openDetail,}) {final _that = this;
 switch (_that) {
 case LoadExpenses():
 return load();case AddExpense():
-return add(_that.expense);}
+return add(_that.expense);case RequestAddExpense():
+return requestAddExpense();case OpenDetailEvent():
+return openDetail(_that.expenseId);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -159,11 +465,13 @@ return add(_that.expense);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  load,TResult? Function( Expense expense)?  add,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  load,TResult? Function( Expense expense)?  add,TResult? Function()?  requestAddExpense,TResult? Function( String expenseId)?  openDetail,}) {final _that = this;
 switch (_that) {
 case LoadExpenses() when load != null:
 return load();case AddExpense() when add != null:
-return add(_that.expense);case _:
+return add(_that.expense);case RequestAddExpense() when requestAddExpense != null:
+return requestAddExpense();case OpenDetailEvent() when openDetail != null:
+return openDetail(_that.expenseId);case _:
   return null;
 
 }
@@ -276,6 +584,104 @@ $ExpenseCopyWith<$Res> get expense {
     return _then(_self.copyWith(expense: value));
   });
 }
+}
+
+/// @nodoc
+
+
+class RequestAddExpense implements ExpenseListEvent {
+  const RequestAddExpense();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RequestAddExpense);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'ExpenseListEvent.requestAddExpense()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class OpenDetailEvent implements ExpenseListEvent {
+  const OpenDetailEvent(this.expenseId);
+  
+
+ final  String expenseId;
+
+/// Create a copy of ExpenseListEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$OpenDetailEventCopyWith<OpenDetailEvent> get copyWith => _$OpenDetailEventCopyWithImpl<OpenDetailEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is OpenDetailEvent&&(identical(other.expenseId, expenseId) || other.expenseId == expenseId));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,expenseId);
+
+@override
+String toString() {
+  return 'ExpenseListEvent.openDetail(expenseId: $expenseId)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $OpenDetailEventCopyWith<$Res> implements $ExpenseListEventCopyWith<$Res> {
+  factory $OpenDetailEventCopyWith(OpenDetailEvent value, $Res Function(OpenDetailEvent) _then) = _$OpenDetailEventCopyWithImpl;
+@useResult
+$Res call({
+ String expenseId
+});
+
+
+
+
+}
+/// @nodoc
+class _$OpenDetailEventCopyWithImpl<$Res>
+    implements $OpenDetailEventCopyWith<$Res> {
+  _$OpenDetailEventCopyWithImpl(this._self, this._then);
+
+  final OpenDetailEvent _self;
+  final $Res Function(OpenDetailEvent) _then;
+
+/// Create a copy of ExpenseListEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? expenseId = null,}) {
+  return _then(OpenDetailEvent(
+null == expenseId ? _self.expenseId : expenseId // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
 }
 
 /// @nodoc

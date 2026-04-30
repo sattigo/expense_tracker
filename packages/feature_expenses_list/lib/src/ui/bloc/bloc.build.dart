@@ -5,17 +5,20 @@ import 'package:feature_expenses_list/src/domain/use_cases/add_expense_use_case.
 import 'package:feature_expenses_list/src/domain/use_cases/get_expenses_use_case.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'action.dart';
 part 'event.dart';
 part 'state.dart';
 part 'bloc.build.freezed.dart';
 
-class ExpenseListBloc extends BaseBloc<ExpenseListEvent, ExpenseListState, void> {
+class ExpenseListBloc extends BaseBloc<ExpenseListEvent, ExpenseListState, ExpenseListAction> {
   ExpenseListBloc({required GetExpensesUseCase getExpensesUseCase, required AddExpenseUseCase addExpenseUseCase})
     : _getExpensesUseCase = getExpensesUseCase,
       _addExpenseUseCase = addExpenseUseCase,
       super(const ExpenseListState.initial()) {
     on<LoadExpenses>(_onLoadExpenses);
     on<AddExpense>(_onAddExpense);
+    on<RequestAddExpense>(_onRequestAddExpense);
+    on<OpenDetailEvent>(_onOpenDetail);
   }
 
   final GetExpensesUseCase _getExpensesUseCase;
@@ -39,9 +42,18 @@ class ExpenseListBloc extends BaseBloc<ExpenseListEvent, ExpenseListState, void>
 
     switch (result) {
       case Success():
+        emitAction(const ExpenseListAction.closeAddExpenseForm());
         add(const ExpenseListEvent.load());
       case Failure(:final failure):
         emit(ExpenseListState.error(failure.message));
     }
+  }
+
+  void _onRequestAddExpense(RequestAddExpense event, Emitter<ExpenseListState> emit) {
+    emitAction(const ExpenseListAction.openAddExpenseForm());
+  }
+
+  void _onOpenDetail(OpenDetailEvent event, Emitter<ExpenseListState> emit) {
+    emitAction(ExpenseListAction.openDetail(event.expenseId));
   }
 }

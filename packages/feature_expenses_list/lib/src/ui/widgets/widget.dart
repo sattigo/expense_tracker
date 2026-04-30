@@ -1,13 +1,9 @@
-import 'dart:async';
-
 import 'package:core_expense_domain/core_expense_domain.dart';
 import 'package:core_l10n/core_l10n.dart';
-import 'package:core_navigation/core_navigation.dart';
 import 'package:feature_expenses_list/src/ui/bloc/bloc.build.dart';
 import 'package:feature_expenses_list/src/ui/utils/category_display.dart';
 import 'package:feature_expenses_list/src/ui/utils/category_icon_mapper.dart';
 import 'package:feature_expenses_list/src/ui/utils/date_formatter.dart';
-import 'package:feature_expenses_list/src/ui/widgets/add_expense_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -43,19 +39,8 @@ class ExpenseListWidget extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => _showAddExpenseBottomSheet(context),
+        onPressed: () => context.read<ExpenseListBloc>().add(const ExpenseListEvent.requestAddExpense()),
         child: const Icon(Icons.add),
-      ),
-    );
-  }
-
-  void _showAddExpenseBottomSheet(BuildContext context) {
-    unawaited(
-      showModalBottomSheet<void>(
-        context: context,
-        isScrollControlled: true,
-        builder: (bottomSheetContext) =>
-            BlocProvider.value(value: context.read<ExpenseListBloc>(), child: const AddExpenseBottomSheet()),
       ),
     );
   }
@@ -92,7 +77,7 @@ class _ExpenseListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: () => unawaited(context.pushNamed(Routes.expenseDetail, extra: _expense.id)),
+      onTap: () => context.read<ExpenseListBloc>().add(ExpenseListEvent.openDetail(_expense.id)),
       leading: CircleAvatar(
         backgroundColor: _expense.type == ExpenseType.income ? Colors.green : Colors.red,
         child: Icon(getCategoryIcon(_expense.category), color: Colors.white),
