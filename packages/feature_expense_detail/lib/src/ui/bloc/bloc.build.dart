@@ -27,8 +27,8 @@ class ExpenseDetailBloc extends BaseBloc<ExpenseDetailEvent, ExpenseDetailState,
     switch (result) {
       case Success(:final data):
         emit(ExpenseDetailState.loaded(data));
-      case Failure(:final failure):
-        emit(ExpenseDetailState.error(failure.message));
+      case Error(:final error):
+        emit(ExpenseDetailState.error(error.message));
     }
   }
 

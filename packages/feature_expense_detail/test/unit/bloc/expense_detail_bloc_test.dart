@@ -40,7 +40,7 @@ void main() {
     });
 
     test('emits [loading, loaded] when LoadExpenseDetail succeeds', () async {
-      when(() => mockRepository.getExpenseById('test-id-1')).thenAnswer((_) async => Success(testExpense));
+      when(() => mockRepository.getExpenseById('test-id-1')).thenAnswer((_) async => Result.success(testExpense));
 
       final expectedStates = [const ExpenseDetailState.loading(), ExpenseDetailState.loaded(testExpense)];
 
@@ -56,7 +56,7 @@ void main() {
     test('emits [loading, error] when LoadExpenseDetail fails', () async {
       when(
         () => mockRepository.getExpenseById('test-id-1'),
-      ).thenAnswer((_) async => const Failure(StorageFailure('Expense not found')));
+      ).thenAnswer((_) async => const Result.failure(StorageFailure('Expense not found')));
 
       final expectedStates = [const ExpenseDetailState.loading(), const ExpenseDetailState.error('Expense not found')];
 
@@ -72,7 +72,7 @@ void main() {
     test('emits [loading, error] when LoadExpenseDetail with invalid id', () async {
       when(
         () => mockRepository.getExpenseById('invalid-id'),
-      ).thenAnswer((_) async => const Failure(StorageFailure('Expense not found')));
+      ).thenAnswer((_) async => const Result.failure(StorageFailure('Expense not found')));
 
       final expectedStates = [const ExpenseDetailState.loading(), const ExpenseDetailState.error('Expense not found')];
 

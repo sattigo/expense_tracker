@@ -32,8 +32,8 @@ class ExpenseListBloc extends BaseBloc<ExpenseListEvent, ExpenseListState, Expen
     switch (result) {
       case Success(:final data):
         emit(ExpenseListState.loaded(data));
-      case Failure(:final failure):
-        emit(ExpenseListState.error(failure.message));
+      case Error(:final error):
+        emit(ExpenseListState.error(error.message));
     }
   }
 
@@ -44,8 +44,8 @@ class ExpenseListBloc extends BaseBloc<ExpenseListEvent, ExpenseListState, Expen
       case Success():
         emitAction(const ExpenseListAction.closeAddExpenseForm());
         add(const ExpenseListEvent.load());
-      case Failure(:final failure):
-        emit(ExpenseListState.error(failure.message));
+      case Error(:final error):
+        emit(ExpenseListState.error(error.message));
     }
   }
 

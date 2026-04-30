@@ -1,0 +1,1 @@
+class PlatformTypeError extends Error {}

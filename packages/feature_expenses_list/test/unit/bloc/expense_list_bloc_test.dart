@@ -47,7 +47,7 @@ void main() {
     });
 
     test('emits [loading, loaded] when LoadExpenses succeeds', () async {
-      when(() => mockRepository.getExpenses()).thenAnswer((_) async => Success([testExpense]));
+      when(() => mockRepository.getExpenses()).thenAnswer((_) async => Result.success([testExpense]));
 
       final expectedStates = [
         const ExpenseListState.loading(),
@@ -66,7 +66,7 @@ void main() {
     test('emits [loading, error] when LoadExpenses fails', () async {
       when(
         () => mockRepository.getExpenses(),
-      ).thenAnswer((_) async => const Failure(StorageFailure('Failed to load expenses')));
+      ).thenAnswer((_) async => const Result.failure(StorageFailure('Failed to load expenses')));
 
       final expectedStates = [
         const ExpenseListState.loading(),
@@ -83,8 +83,8 @@ void main() {
     });
 
     test('emits [loading, loaded] when AddExpense succeeds and reloads list', () async {
-      when(() => mockRepository.addExpense(any())).thenAnswer((_) async => const Success(null));
-      when(() => mockRepository.getExpenses()).thenAnswer((_) async => Success([testExpense]));
+      when(() => mockRepository.addExpense(any())).thenAnswer((_) async => const Result.success(null));
+      when(() => mockRepository.getExpenses()).thenAnswer((_) async => Result.success([testExpense]));
 
       final expectedStates = [
         const ExpenseListState.loading(),
@@ -104,7 +104,7 @@ void main() {
     test('emits [error] when AddExpense fails', () async {
       when(
         () => mockRepository.addExpense(any()),
-      ).thenAnswer((_) async => const Failure(StorageFailure('Failed to add expense')));
+      ).thenAnswer((_) async => const Result.failure(StorageFailure('Failed to add expense')));
 
       final expectedStates = [const ExpenseListState.error('Failed to add expense')];
 
@@ -135,8 +135,8 @@ void main() {
     });
 
     test('emits closeAddExpenseForm action when AddExpense succeeds', () async {
-      when(() => mockRepository.addExpense(any())).thenAnswer((_) async => const Success(null));
-      when(() => mockRepository.getExpenses()).thenAnswer((_) async => Success([testExpense]));
+      when(() => mockRepository.addExpense(any())).thenAnswer((_) async => const Result.success(null));
+      when(() => mockRepository.getExpenses()).thenAnswer((_) async => Result.success([testExpense]));
 
       unawaited(expectLater(bloc.actions, emits(const ExpenseListAction.closeAddExpenseForm())));
 
