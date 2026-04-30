@@ -16,7 +16,6 @@ class ExpenseListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = context.read<ExpenseListBloc>();
     final l10n = S.of(context)!;
 
     return Scaffold(
@@ -36,7 +35,10 @@ class ExpenseListWidget extends StatelessWidget {
                       return _ExpenseListItem(expense: expense);
                     },
                   ),
-            error: (message) => _ErrorView(bloc: bloc, message: message),
+            error: (message) => _ErrorView(
+              message: message,
+              onRetry: () => context.read<ExpenseListBloc>().add(const ExpenseListEvent.load()),
+            ),
           );
         },
       ),
@@ -60,10 +62,10 @@ class ExpenseListWidget extends StatelessWidget {
 }
 
 class _ErrorView extends StatelessWidget {
-  const _ErrorView({required ExpenseListBloc bloc, required String message}) : _message = message, _bloc = bloc;
+  const _ErrorView({required String message, required VoidCallback onRetry}) : _message = message, _onRetry = onRetry;
 
-  final ExpenseListBloc _bloc;
   final String _message;
+  final VoidCallback _onRetry;
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +77,7 @@ class _ErrorView extends StatelessWidget {
         children: [
           Text(l10n.errorPrefix(_message)),
           const SizedBox(height: 16),
-          ElevatedButton(onPressed: () => _bloc.add(const ExpenseListEvent.load()), child: Text(l10n.retry)),
+          ElevatedButton(onPressed: _onRetry, child: Text(l10n.retry)),
         ],
       ),
     );

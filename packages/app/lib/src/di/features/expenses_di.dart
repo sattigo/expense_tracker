@@ -6,13 +6,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> setupExpensesDI() async {
   getIt
-    ..registerSingleton<ExpenseLocalDataSource>(
-      ExpenseLocalDataSourceImpl(prefs: getIt<SharedPreferences>()),
+    ..registerSingleton<ExpenseLocalDataSource>(ExpenseLocalDataSourceImpl(prefs: getIt<SharedPreferences>()))
+    ..registerSingleton<ExpenseRepository>(ExpenseRepositoryImpl(localDataSource: getIt<ExpenseLocalDataSource>()))
+    ..registerSingleton<GetExpensesUseCase>(GetExpensesUseCase(repository: getIt<ExpenseRepository>()))
+    ..registerSingleton<AddExpenseUseCase>(AddExpenseUseCase(repository: getIt<ExpenseRepository>()))
+    ..registerFactory<ExpenseListBloc>(
+      () => ExpenseListBloc(
+        getExpensesUseCase: getIt<GetExpensesUseCase>(),
+        addExpenseUseCase: getIt<AddExpenseUseCase>(),
+      ),
     )
-    ..registerSingleton<ExpenseRepository>(
-      ExpenseRepositoryImpl(localDataSource: getIt<ExpenseLocalDataSource>()),
+    ..registerSingleton<GetExpenseByIdUseCase>(GetExpenseByIdUseCase(repository: getIt<ExpenseRepository>()))
+    ..registerFactory<ExpenseDetailBloc>(
+      () => ExpenseDetailBloc(getExpenseByIdUseCase: getIt<GetExpenseByIdUseCase>()),
     );
-
-  registerExpensesListDependencies(getIt);
-  registerExpenseDetailDependencies(getIt);
 }
