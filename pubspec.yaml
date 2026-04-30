@@ -10,11 +10,13 @@ workspace:
   - packages/app
   - packages/core_bloc
   - packages/core_chain
+  - packages/core_expense_domain
   - packages/core_failure
   - packages/core_l10n
   - packages/core_navigation
   - packages/core_result
-  - packages/feature_expenses
+  - packages/feature_expense_detail
+  - packages/feature_expenses_list
 
 dependencies:
   app:

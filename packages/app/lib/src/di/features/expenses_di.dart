@@ -1,24 +1,18 @@
 import 'package:app/src/di/service_locator.dart';
-import 'package:feature_expenses/feature_expenses_internal.dart';
+import 'package:core_expense_domain/core_expense_domain.dart';
+import 'package:feature_expense_detail/feature_expense_detail.dart';
+import 'package:feature_expenses_list/feature_expenses_list.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> setupExpensesDI() async {
-  getIt.registerSingleton<ExpenseLocalDataSource>(ExpenseLocalDataSourceImpl(getIt<SharedPreferences>()));
+  getIt
+    ..registerSingleton<ExpenseLocalDataSource>(
+      ExpenseLocalDataSourceImpl(prefs: getIt<SharedPreferences>()),
+    )
+    ..registerSingleton<ExpenseRepository>(
+      ExpenseRepositoryImpl(localDataSource: getIt<ExpenseLocalDataSource>()),
+    );
 
-  getIt.registerSingleton<ExpenseRepository>(ExpenseRepositoryImpl(getIt<ExpenseLocalDataSource>()));
-
-  getIt.registerSingleton<GetExpensesUseCase>(GetExpensesUseCase(getIt<ExpenseRepository>()));
-
-  getIt.registerSingleton<AddExpenseUseCase>(AddExpenseUseCase(getIt<ExpenseRepository>()));
-
-  getIt.registerSingleton<GetExpenseByIdUseCase>(GetExpenseByIdUseCase(getIt<ExpenseRepository>()));
-
-  getIt.registerFactory<ExpenseListBloc>(
-    () =>
-        ExpenseListBloc(getExpensesUseCase: getIt<GetExpensesUseCase>(), addExpenseUseCase: getIt<AddExpenseUseCase>()),
-  );
-
-  getIt.registerFactory<ExpenseDetailBloc>(
-    () => ExpenseDetailBloc(getExpenseByIdUseCase: getIt<GetExpenseByIdUseCase>()),
-  );
+  registerExpensesListDependencies(getIt);
+  registerExpenseDetailDependencies(getIt);
 }
