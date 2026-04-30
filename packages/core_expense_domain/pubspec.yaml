@@ -1,0 +1,28 @@
+name: core_expense_domain
+description: Shared expense domain models, repository contracts and data layer
+version: 1.0.0
+publish_to: none
+
+environment:
+  sdk: ">=3.11.1 <4.0.0"
+
+resolution: workspace
+
+dependencies:
+  core_failure:
+    path: ../core_failure
+  core_result:
+    path: ../core_result
+  flutter:
+    sdk: flutter
+  freezed_annotation: "3.1.0"
+  json_annotation: "4.11.0"
+  shared_preferences: "2.3.5"
+
+dev_dependencies:
+  build_runner: "2.14.1"
+  flutter_lints: "6.0.0"
+  flutter_test:
+    sdk: flutter
+  freezed: "3.2.5"
+  json_serializable: "6.13.1"
