@@ -21,10 +21,14 @@ dependencies:
     path: ../core_navigation
   core_platform:
     path: ../core_platform
+  feature_chart:
+    path: ../feature_chart
   feature_expense_detail:
     path: ../feature_expense_detail
   feature_expenses_list:
     path: ../feature_expenses_list
+  feature_home:
+    path: ../feature_home
   feature_transaction_form:
     path: ../feature_transaction_form
   flutter:

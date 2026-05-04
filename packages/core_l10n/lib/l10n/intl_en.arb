@@ -113,5 +113,17 @@
   "categoryOther": "Other",
   "@categoryOther": {
     "description": "Other category label"
+  },
+  "chartNoExpensesYet": "No expenses yet",
+  "@chartNoExpensesYet": {
+    "description": "Empty state message shown in chart tab when there is no data to display"
+  },
+  "homeTabList": "List",
+  "@homeTabList": {
+    "description": "Bottom navigation tab label for the expenses list screen"
+  },
+  "homeTabChart": "Chart",
+  "@homeTabChart": {
+    "description": "Bottom navigation tab label for the expenses chart screen"
   }
 }

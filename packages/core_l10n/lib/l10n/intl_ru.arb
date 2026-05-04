@@ -26,5 +26,8 @@
   "categoryEntertainment": "Развлечения",
   "categoryShopping": "Покупки",
   "categoryHealth": "Здоровье",
-  "categoryOther": "Другое"
+  "categoryOther": "Другое",
+  "chartNoExpensesYet": "Трат нет",
+  "homeTabList": "Список",
+  "homeTabChart": "График"
 }
