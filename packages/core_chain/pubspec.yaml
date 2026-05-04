@@ -9,8 +9,6 @@ environment:
 resolution: workspace
 
 dependencies:
-  core_result:
-    path: ../core_result
   flutter:
     sdk: flutter
 

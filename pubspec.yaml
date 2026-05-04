@@ -14,6 +14,7 @@ workspace:
   - packages/core_failure
   - packages/core_l10n
   - packages/core_navigation
+  - packages/core_platform
   - packages/core_result
   - packages/feature_expense_detail
   - packages/feature_expenses_list

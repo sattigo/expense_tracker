@@ -1,5 +1,5 @@
-name: core_result
-description: Result sealed class for handling success and failure states
+name: core_platform
+description: Platform type detection and persistence service
 version: 1.0.0
 publish_to: none
 
@@ -11,11 +11,9 @@ resolution: workspace
 dependencies:
   flutter:
     sdk: flutter
-  freezed_annotation: "3.1.0"
+  shared_preferences: "2.3.5"
 
 dev_dependencies:
-  build_runner: "2.14.1"
   flutter_lints: "6.0.0"
   flutter_test:
     sdk: flutter
-  freezed: "3.2.5"

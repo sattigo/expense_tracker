@@ -15,9 +15,9 @@ final class ExpenseRepositoryImpl implements ExpenseRepository {
     try {
       final dtos = await _localDataSource.getExpenses();
       final expenses = dtos.map((dto) => dto.toDomain()).toList();
-      return Success(expenses);
+      return Result.success(expenses);
     } on Exception catch (e) {
-      return Failure(StorageFailure('Failed to load expenses: $e'));
+      return Result.failure(StorageFailure('Failed to load expenses: $e'));
     }
   }
 
@@ -26,9 +26,9 @@ final class ExpenseRepositoryImpl implements ExpenseRepository {
     try {
       final dto = ExpenseDtoMapper.fromDomain(expense);
       await _localDataSource.saveExpense(dto);
-      return const Success(null);
+      return const Result.success(null);
     } on Exception catch (e) {
-      return Failure(StorageFailure('Failed to save expense: $e'));
+      return Result.failure(StorageFailure('Failed to save expense: $e'));
     }
   }
 
@@ -37,11 +37,11 @@ final class ExpenseRepositoryImpl implements ExpenseRepository {
     try {
       final dto = await _localDataSource.getExpenseById(id);
       if (dto == null) {
-        return Failure(StorageFailure('Expense with id $id not found'));
+        return Result.failure(StorageFailure('Expense with id $id not found'));
       }
-      return Success(dto.toDomain());
+      return Result.success(dto.toDomain());
     } on Exception catch (e) {
-      return Failure(StorageFailure('Failed to load expense: $e'));
+      return Result.failure(StorageFailure('Failed to load expense: $e'));
     }
   }
 }

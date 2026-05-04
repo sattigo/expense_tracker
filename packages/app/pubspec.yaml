@@ -17,6 +17,8 @@ dependencies:
     path: ../core_l10n
   core_navigation:
     path: ../core_navigation
+  core_platform:
+    path: ../core_platform
   feature_expense_detail:
     path: ../feature_expense_detail
   feature_expenses_list:
