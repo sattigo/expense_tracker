@@ -10,6 +10,7 @@ class ExpenseTrackerApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'Expense Tracker',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue), useMaterial3: true),
       routerConfig: getIt<GoRouter>(),
       localizationsDelegates: S.localizationsDelegates,

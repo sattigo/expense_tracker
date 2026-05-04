@@ -18,5 +18,13 @@
   "transactionDetails": "Детали транзакции",
   "noData": "Нет данных",
   "goBack": "Назад",
-  "transactionId": "ID транзакции"
+  "transactionId": "ID транзакции",
+  "typeIncome": "Доход",
+  "typeExpense": "Расход",
+  "categoryFood": "Еда",
+  "categoryTransport": "Транспорт",
+  "categoryEntertainment": "Развлечения",
+  "categoryShopping": "Покупки",
+  "categoryHealth": "Здоровье",
+  "categoryOther": "Другое"
 }
