@@ -1,0 +1,18 @@
+name: core_event_bus
+description: Typed event bus for cross-feature communication
+version: 1.0.0
+publish_to: none
+
+environment:
+  sdk: ">=3.11.1 <4.0.0"
+
+resolution: workspace
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_lints: "6.0.0"
+  flutter_test:
+    sdk: flutter

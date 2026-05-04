@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:core_navigation/core_navigation.dart';
 import 'package:feature_expenses_list/src/ui/bloc/bloc.build.dart';
-import 'package:feature_expenses_list/src/ui/widgets/add_expense_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -37,17 +36,6 @@ class _ExpenseListCoordinatorState extends State<ExpenseListCoordinator> {
     switch (action) {
       case OpenDetail(:final expenseId):
         unawaited(context.pushNamed(Routes.expenseDetail, extra: expenseId));
-      case OpenAddExpenseForm():
-        final bloc = context.read<ExpenseListBloc>();
-        unawaited(
-          showModalBottomSheet<void>(
-            context: context,
-            isScrollControlled: true,
-            builder: (bottomSheetContext) => BlocProvider.value(value: bloc, child: const AddExpenseBottomSheet()),
-          ),
-        );
-      case CloseAddExpenseForm():
-        Navigator.of(context).pop();
     }
   }
 

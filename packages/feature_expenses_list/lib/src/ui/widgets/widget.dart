@@ -4,6 +4,7 @@ import 'package:feature_expenses_list/src/ui/bloc/bloc.build.dart';
 import 'package:feature_expenses_list/src/ui/utils/category_display.dart';
 import 'package:feature_expenses_list/src/ui/utils/category_icon_mapper.dart';
 import 'package:feature_expenses_list/src/ui/utils/date_formatter.dart';
+import 'package:feature_transaction_form/feature_transaction_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -39,7 +40,7 @@ class ExpenseListWidget extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => context.read<ExpenseListBloc>().add(const ExpenseListEvent.requestAddExpense()),
+        onPressed: () => showTransactionForm(context),
         child: const Icon(Icons.add),
       ),
     );

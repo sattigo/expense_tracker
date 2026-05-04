@@ -1,21 +1,20 @@
 import 'package:core_expense_domain/core_expense_domain.dart';
 import 'package:core_l10n/core_l10n.dart';
-import 'package:feature_expenses_list/src/ui/bloc/bloc.build.dart';
-import 'package:feature_expenses_list/src/ui/utils/category_display.dart';
-import 'package:feature_expenses_list/src/ui/utils/date_formatter.dart';
-import 'package:feature_expenses_list/src/ui/utils/type_display.dart';
+import 'package:feature_transaction_form/src/ui/bloc/bloc.build.dart';
+import 'package:feature_transaction_form/src/ui/utils/category_display.dart';
+import 'package:feature_transaction_form/src/ui/utils/date_formatter.dart';
+import 'package:feature_transaction_form/src/ui/utils/type_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:uuid/uuid.dart';
 
-class AddExpenseBottomSheet extends StatefulWidget {
-  const AddExpenseBottomSheet({super.key});
+class TransactionFormWidget extends StatefulWidget {
+  const TransactionFormWidget({super.key});
 
   @override
-  State<AddExpenseBottomSheet> createState() => _AddExpenseBottomSheetState();
+  State<TransactionFormWidget> createState() => _TransactionFormWidgetState();
 }
 
-class _AddExpenseBottomSheetState extends State<AddExpenseBottomSheet> {
+class _TransactionFormWidgetState extends State<TransactionFormWidget> {
   final _formKey = GlobalKey<FormState>();
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
@@ -120,9 +119,18 @@ class _AddExpenseBottomSheetState extends State<AddExpenseBottomSheet> {
                 },
               ),
               const SizedBox(height: 24),
-              ElevatedButton(
-                onPressed: _onSave,
-                child: Padding(padding: const EdgeInsets.symmetric(vertical: 16), child: Text(l10n.save)),
+              BlocBuilder<TransactionFormBloc, TransactionFormState>(
+                buildWhen: (previous, current) => previous != current,
+                builder: (context, state) {
+                  final isSubmitting = state.maybeWhen(submitting: () => true, orElse: () => false);
+                  return ElevatedButton(
+                    onPressed: isSubmitting ? null : _onSave,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      child: isSubmitting ? const CircularProgressIndicator() : Text(l10n.save),
+                    ),
+                  );
+                },
               ),
               const SizedBox(height: 16),
             ],
@@ -134,16 +142,15 @@ class _AddExpenseBottomSheetState extends State<AddExpenseBottomSheet> {
 
   void _onSave() {
     if (_formKey.currentState!.validate()) {
-      final expense = Expense(
-        id: const Uuid().v4(),
-        amount: double.parse(_amountController.text),
-        title: _titleController.text,
-        date: _selectedDate,
-        category: _selectedCategory,
-        type: _selectedType,
+      context.read<TransactionFormBloc>().add(
+        TransactionFormEvent.submit(
+          title: _titleController.text,
+          amount: double.parse(_amountController.text),
+          type: _selectedType,
+          category: _selectedCategory,
+          date: _selectedDate,
+        ),
       );
-
-      context.read<ExpenseListBloc>().add(ExpenseListEvent.add(expense));
     }
   }
 }

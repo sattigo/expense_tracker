@@ -1,4 +1,5 @@
 import 'package:app/src/di/service_locator.dart';
+import 'package:core_event_bus/core_event_bus.dart';
 import 'package:core_expense_domain/core_expense_domain.dart';
 import 'package:feature_expense_detail/feature_expense_detail.dart';
 import 'package:feature_expenses_list/feature_expenses_list.dart';
@@ -9,12 +10,8 @@ Future<void> setupExpensesDI() async {
     ..registerSingleton<ExpenseLocalDataSource>(ExpenseLocalDataSourceImpl(prefs: getIt<SharedPreferences>()))
     ..registerSingleton<ExpenseRepository>(ExpenseRepositoryImpl(localDataSource: getIt<ExpenseLocalDataSource>()))
     ..registerSingleton<GetExpensesUseCase>(GetExpensesUseCase(repository: getIt<ExpenseRepository>()))
-    ..registerSingleton<AddExpenseUseCase>(AddExpenseUseCase(repository: getIt<ExpenseRepository>()))
     ..registerFactory<ExpenseListBloc>(
-      () => ExpenseListBloc(
-        getExpensesUseCase: getIt<GetExpensesUseCase>(),
-        addExpenseUseCase: getIt<AddExpenseUseCase>(),
-      ),
+      () => ExpenseListBloc(getExpensesUseCase: getIt<GetExpensesUseCase>(), eventBus: getIt<AppEventBus>()),
     )
     ..registerSingleton<GetExpenseByIdUseCase>(GetExpenseByIdUseCase(repository: getIt<ExpenseRepository>()))
     ..registerFactory<ExpenseDetailBloc>(

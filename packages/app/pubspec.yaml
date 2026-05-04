@@ -11,6 +11,8 @@ resolution: workspace
 dependencies:
   core_bloc:
     path: ../core_bloc
+  core_event_bus:
+    path: ../core_event_bus
   core_expense_domain:
     path: ../core_expense_domain
   core_l10n:
@@ -23,6 +25,8 @@ dependencies:
     path: ../feature_expense_detail
   feature_expenses_list:
     path: ../feature_expenses_list
+  feature_transaction_form:
+    path: ../feature_transaction_form
   flutter:
     sdk: flutter
   flutter_localizations:
