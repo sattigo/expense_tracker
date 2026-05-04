@@ -1,4 +1,6 @@
+import 'package:app/src/di/core_event_bus_di.dart';
 import 'package:app/src/di/features/expenses_di.dart';
+import 'package:app/src/di/features/transaction_form_di.dart';
 import 'package:app/src/di/router_di.dart';
 import 'package:core_platform/core_platform.dart';
 import 'package:get_it/get_it.dart';
@@ -14,5 +16,7 @@ Future<void> setupServiceLocator() async {
   getIt.registerSingleton<PlatformTypeService>(platformTypeService);
 
   await setupRouterDI();
+  await setupCoreEventBusDI();
   await setupExpensesDI();
+  await setupTransactionFormDI();
 }
