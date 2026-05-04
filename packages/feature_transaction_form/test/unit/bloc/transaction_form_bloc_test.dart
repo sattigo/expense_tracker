@@ -4,8 +4,7 @@ import 'package:core_event_bus/core_event_bus.dart';
 import 'package:core_expense_domain/core_expense_domain.dart';
 import 'package:core_failure/core_failure.dart';
 import 'package:core_result/core_result.dart';
-import 'package:feature_transaction_form/src/domain/use_cases/add_transaction_use_case.dart';
-import 'package:feature_transaction_form/src/ui/bloc/bloc.build.dart';
+import 'package:feature_transaction_form/feature_transaction_form.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
