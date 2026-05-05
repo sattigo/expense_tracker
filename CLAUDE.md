@@ -12,12 +12,11 @@
 ## Контекст проекта
 
 Демо-приложение: список личных расходов (Expense Tracker).
-Два экрана: список транзакций → детальный экран транзакции.
+Экраны: список транзакций, детальный экран транзакции, форма добавления транзакции (модал), график расходов, домашний shell (навигация).
 Локальное хранилище: SharedPreferences. Сетевых запросов нет.
 Цель кода: демонстрация Clean Architecture на Flutter. Код должен быть читаемым и педагогически прозрачным.
 
-Целевое состояние проекта — Melos монорепо с пакетной структурой (в процессе перехода).
-Новые фичи создаются отдельными пакетами в `packages/`.
+Проект — Melos монорепо с пакетной структурой. Новые фичи создаются отдельными пакетами в `packages/`.
 
 ---
 
@@ -25,7 +24,9 @@
 
 | Слой | Технология |
 |---|---|
-| State management | `BaseBloc<Event, State>` из `core_bloc` |
+| State management | `BaseBloc<Event, State, Action>` из `core_bloc` |
+| Side effects | `Action`-поток через `emitAction()` в `BaseBloc` |
+| Inter-feature events | `AppEventBus` из `core_event_bus` |
 | DI / Service locator | `get_it` |
 | Роутинг | `go_router` (`AppRouter`, `AppGoRoute` из `core_navigation`) |
 | Локальное хранилище | `shared_preferences` |
@@ -42,44 +43,88 @@
 
 ```
 packages/
-├── app/                  # Точка входа, DI агрегатор, MainRouter
-├── core_bloc/            # BaseBloc<Event, State>
-├── core_chain/           # ChainPipeline (transform + validate)
-├── core_failure/         # Failure sealed class
-├── core_result/          # Result<S, F> sealed class
-├── core_navigation/      # AppRouter, AppGoRoute
-├── core_assets/
-├── core_l10n/
-├── core_platform/
-└── feature_xxx/          # Один пакет на фичу
+├── app/                    # Точка входа, DI агрегатор (service_locator.dart), MainRouter
+├── core_bloc/              # BaseBloc<Event, State, Action>
+├── core_chain/             # ChainTransformer, ChainValidator, Chainable, LinkableMixin
+├── core_event_bus/         # AppEventBus, AppEvent (межфичевые события)
+├── core_expense_domain/    # Общие domain + data для расходов (модели, репозиторий, datasource)
+├── core_failure/           # Failure sealed class
+├── core_result/            # Result<S, F> sealed class
+├── core_navigation/        # AppRouter, AppGoRoute
+├── core_assets/            # (пусто)
+├── core_l10n/              # Локализация (l10n.yaml, ARB-файлы)
+├── core_platform/          # PlatformTypeService
+├── feature_home/           # Shell-виджет навигации (home_shell_widget.dart)
+├── feature_expenses_list/  # Список транзакций
+├── feature_expense_detail/ # Детальный экран транзакции
+├── feature_transaction_form/ # Форма добавления (открывается как модал)
+└── feature_chart/          # График расходов
 ```
 
 ---
 
-## Структура feature-пакета (строгая)
+## Архитектурное решение: core_expense_domain
+
+Domain-модели, репозиторий и datasource вынесены в **общий пакет `core_expense_domain`**, а не дублируются в каждой фиче. Структура пакета:
 
 ```
-feature_expenses/
+core_expense_domain/lib/src/
+├── domain/
+│   ├── models/             # Expense, ExpenseCategory, ExpenseType
+│   └── repositories/contract.dart  # ExpenseRepository (контракт)
+└── data/
+    ├── repositories/impl.dart      # ExpenseRepositoryImpl
+    ├── data_sources/local/
+    │   ├── contract.dart            # ExpenseLocalDataSource
+    │   └── impl.dart                # ExpenseLocalDataSourceImpl
+    └── dto/expense_dto.build.dart   # ExpenseDto (freezed + json_serializable)
+```
+
+Фиче-пакеты содержат только UseCase и UI-слой. Репозиторий и DataSource регистрируются в DI из `app/`.
+
+---
+
+## Структура feature-пакета
+
+```
+feature_expenses_list/
 ├── lib/
-│   ├── feature_expenses.dart     # ТОЛЬКО экспортирует src/ui/widgets/view.dart
+│   ├── feature_expenses_list.dart    # ТОЛЬКО экспортирует src/ui/widgets/view.dart
 │   └── src/
-│       ├── ui/
-│       │   ├── bloc/
-│       │   │   ├── bloc.build.dart   # extends BaseBloc + part директивы
-│       │   │   ├── event.dart        # part of 'bloc.build.dart'
-│       │   │   └── state.dart        # part of 'bloc.build.dart'
-│       │   ├── widgets/
-│       │   │   ├── view.dart         # BlocProvider
-│       │   │   └── widget.dart       # BlocBuilder UI
-│       │   └── navigation/route.dart
 │       ├── domain/
-│       │   ├── models/
-│       │   ├── repositories/contract.dart
-│       │   └── use_cases/fetch_expenses.dart
-│       └── data/
-│           ├── repositories/impl.dart
-│           ├── data_sources/local/
-│           └── dto/
+│       │   └── use_cases/get_expenses_use_case.dart
+│       └── ui/
+│           ├── bloc/
+│           │   ├── bloc.build.dart   # extends BaseBloc<Event, State, Action> + part директивы
+│           │   ├── event.dart        # part of 'bloc.build.dart'
+│           │   ├── state.dart        # part of 'bloc.build.dart'
+│           │   └── action.dart       # sealed class Action (side effects)
+│           ├── widgets/
+│           │   ├── view.dart                      # BlocProvider + подписка на Action
+│           │   ├── widget.dart                    # BlocBuilder UI
+│           │   └── <feature>_coordinator.dart     # Координатор навигации/side-effects
+│           ├── utils/                             # Вспомогательные форматтеры/маперы
+│           └── navigation/route.dart              # AppGoRoute (или show_<feature>.dart для модала)
+└── test/
+    ├── unit/bloc/<feature>_bloc_test.dart
+    └── widget/<feature>_widget_test.dart
+```
+
+**Исключение для модалов:** `feature_transaction_form` использует `show_transaction_form.dart` вместо route.dart — открывается через `showModalBottomSheet`, а не go_router.
+
+---
+
+## DI-структура (app/)
+
+```
+app/lib/src/di/
+├── service_locator.dart          # Точка входа: регистрирует SharedPreferences, PlatformTypeService, вызывает setupXxxDI()
+├── core_event_bus_di.dart        # AppEventBus singleton
+├── router_di.dart                # GoRouter
+└── features/
+    ├── expenses_di.dart          # DataSource → Repository → UseCases → Blocs (factory)
+    ├── transaction_form_di.dart
+    └── chart_di.dart
 ```
 
 ---
@@ -87,10 +132,13 @@ feature_expenses/
 ## Поток данных
 
 ```
-Event → BaseBloc → UseCase → Repository → DataSource
+Event → BaseBloc → UseCase → Repository (core_expense_domain) → DataSource
   → Result<Model, Failure>
   → обновление State
+  → Action (side effect) → Coordinator / View
 ```
+
+Межфичевые события (например, «транзакция добавлена») передаются через `AppEventBus`.
 
 ---
 
@@ -105,16 +153,19 @@ Event → BaseBloc → UseCase → Repository → DataSource
 | Repository (реализация) | `ExpenseRepositoryImpl` |
 | DataSource (контракт) | `ExpenseLocalDataSource` |
 | DataSource (реализация) | `ExpenseLocalDataSourceImpl` |
-| BLoC | `ExpenseBloc` |
-| Event | `ExpenseEvent` |
-| State | `ExpenseState` |
+| BLoC | `ExpenseListBloc` |
+| Event | `ExpenseListEvent` |
+| State | `ExpenseListState` |
+| Action (side effect) | `ExpenseListAction` |
 | View (BlocProvider) | `ExpenseListView` |
 | Widget (BlocBuilder UI) | `ExpenseListWidget` |
-| Route | `ExpenseListRoute` |
+| Coordinator | `ExpenseListCoordinator` |
+| Route (go_router) | `ExpenseListRoute` |
+| Modal helper | `showTransactionForm()` |
 
-Файлы с кодогенерацией: `<n>.build.dart`
+Файлы с кодогенерацией: `<name>.build.dart`
 Контракты: `contract.dart` / реализации: `impl.dart`
-BLoC-файлы: `bloc.build.dart`, `event.dart`, `state.dart` — всегда в папке `bloc/`
+BLoC-файлы: `bloc.build.dart`, `event.dart`, `state.dart`, `action.dart` — всегда в папке `bloc/`
 
 ---
 
@@ -147,7 +198,7 @@ dart run melos run reinit
 Точечные запуски (без Melos), когда нужен один файл/тест:
 
 ```bash
-flutter test packages/feature_expenses/test/unit/.../expense_bloc_test.dart
+flutter test packages/feature_expenses_list/test/unit/bloc/expense_list_bloc_test.dart
 flutter test --name "emits loading"
 ```
 
