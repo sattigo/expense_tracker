@@ -29,7 +29,7 @@ class ExpenseListWidget extends StatelessWidget {
                   loaded: (expenses) => expenses.isEmpty
                       ? Center(child: Text(l10n.noExpensesYetAddFirst))
                       : ListView.builder(
-                          padding: const EdgeInsets.only(bottom: 8),
+                          padding: const EdgeInsets.only(bottom: 80),
                           itemCount: expenses.length,
                           itemBuilder: (context, index) {
                             final expense = expenses[index];
@@ -59,19 +59,21 @@ class _AddItemButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = S.of(context)!;
-    final colorScheme = Theme.of(context).colorScheme;
+    final bottomInset = MediaQuery.of(context).viewPadding.bottom;
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+      padding: EdgeInsets.fromLTRB(16, 8, 16, 8 + bottomInset),
       child: SizedBox(
         width: double.infinity,
         child: TextButton(
           onPressed: _onPressed,
           style: TextButton.styleFrom(
-            backgroundColor: colorScheme.surfaceContainerHighest,
+            backgroundColor: Colors.grey,
             foregroundColor: Colors.white,
             shape: const RoundedRectangleBorder(),
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            minimumSize: Size.zero,
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           ),
           child: Text(l10n.addItem),
         ),
