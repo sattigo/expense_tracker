@@ -30,7 +30,6 @@ class ExpenseListWidget extends StatelessWidget {
                   loaded: (expenses) => expenses.isEmpty
                       ? Center(child: Text(l10n.noExpensesYetAddFirst))
                       : ListView.builder(
-                          padding: const EdgeInsets.only(bottom: 80),
                           itemCount: expenses.length,
                           itemBuilder: (context, index) {
                             final expense = expenses[index];
