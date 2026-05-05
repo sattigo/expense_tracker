@@ -23,8 +23,6 @@ dependencies:
     path: ../core_navigation
   core_result:
     path: ../core_result
-  feature_expense_detail:
-    path: ../feature_expense_detail
   feature_transaction_form:
     path: ../feature_transaction_form
   flutter:

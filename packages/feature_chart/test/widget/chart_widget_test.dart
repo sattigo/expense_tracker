@@ -53,7 +53,8 @@ void main() {
     await tester.pumpWidget(buildTestWidget());
     await tester.pump();
 
-    expect(find.text('No expenses yet'), findsAtLeastNWidgets(1));
+    final l10n = S.of(tester.element(find.byType(ChartWidget)))!;
+    expect(find.text(l10n.chartNoExpensesYet), findsOneWidget);
     expect(find.byType(LineChart), findsNothing);
   });
 
