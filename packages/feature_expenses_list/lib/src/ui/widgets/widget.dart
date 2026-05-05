@@ -17,31 +17,64 @@ class ExpenseListWidget extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.appTitle), elevation: 2),
-      body: BlocBuilder<ExpenseListBloc, ExpenseListState>(
-        buildWhen: (previous, current) => previous != current,
-        builder: (context, state) {
-          return state.when(
-            initial: () => Center(child: Text(l10n.noExpensesYet)),
-            loading: () => const Center(child: CircularProgressIndicator()),
-            loaded: (expenses) => expenses.isEmpty
-                ? Center(child: Text(l10n.noExpensesYetAddFirst))
-                : ListView.builder(
-                    itemCount: expenses.length,
-                    itemBuilder: (context, index) {
-                      final expense = expenses[index];
-                      return _ExpenseListItem(expense: expense);
-                    },
+      body: Column(
+        children: [
+          Expanded(
+            child: BlocBuilder<ExpenseListBloc, ExpenseListState>(
+              buildWhen: (previous, current) => previous != current,
+              builder: (context, state) {
+                return state.when(
+                  initial: () => Center(child: Text(l10n.noExpensesYet)),
+                  loading: () => const Center(child: CircularProgressIndicator()),
+                  loaded: (expenses) => expenses.isEmpty
+                      ? Center(child: Text(l10n.noExpensesYetAddFirst))
+                      : ListView.builder(
+                          padding: const EdgeInsets.only(bottom: 8),
+                          itemCount: expenses.length,
+                          itemBuilder: (context, index) {
+                            final expense = expenses[index];
+                            return _ExpenseListItem(expense: expense);
+                          },
+                        ),
+                  error: (message) => _ErrorView(
+                    message: message,
+                    onRetry: () => context.read<ExpenseListBloc>().add(const ExpenseListEvent.load()),
                   ),
-            error: (message) => _ErrorView(
-              message: message,
-              onRetry: () => context.read<ExpenseListBloc>().add(const ExpenseListEvent.load()),
+                );
+              },
             ),
-          );
-        },
+          ),
+          _AddItemButton(onPressed: () => showTransactionForm(context)),
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => showTransactionForm(context),
-        child: const Icon(Icons.add),
+    );
+  }
+}
+
+class _AddItemButton extends StatelessWidget {
+  const _AddItemButton({required VoidCallback onPressed}) : _onPressed = onPressed;
+
+  final VoidCallback _onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = S.of(context)!;
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+      child: SizedBox(
+        width: double.infinity,
+        child: TextButton(
+          onPressed: _onPressed,
+          style: TextButton.styleFrom(
+            backgroundColor: colorScheme.surfaceContainerHighest,
+            foregroundColor: Colors.white,
+            shape: const RoundedRectangleBorder(),
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+          ),
+          child: Text(l10n.addItem),
+        ),
       ),
     );
   }

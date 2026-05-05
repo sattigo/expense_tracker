@@ -125,5 +125,9 @@
   "homeTabChart": "Chart",
   "@homeTabChart": {
     "description": "Bottom navigation tab label for the expenses chart screen"
+  },
+  "addItem": "Add item",
+  "@addItem": {
+    "description": "Bottom button label for adding a new expense or income item"
   }
 }
