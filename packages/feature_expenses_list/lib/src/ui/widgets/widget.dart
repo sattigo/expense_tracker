@@ -68,8 +68,8 @@ class _AddItemButton extends StatelessWidget {
         child: TextButton(
           onPressed: _onPressed,
           style: TextButton.styleFrom(
-            backgroundColor: Colors.grey,
-            foregroundColor: Colors.white,
+            backgroundColor: Theme.of(context).colorScheme.outline,
+            foregroundColor: Theme.of(context).colorScheme.surface,
             shape: const RoundedRectangleBorder(),
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
             minimumSize: Size.zero,

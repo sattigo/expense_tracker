@@ -1,7 +1,6 @@
 import 'package:core_expense_domain/core_expense_domain.dart';
 import 'package:core_l10n/core_l10n.dart';
-import 'package:feature_expenses_list/src/ui/bloc/bloc.build.dart';
-import 'package:feature_expenses_list/src/ui/widgets/widget.dart';
+import 'package:feature_expenses_list/feature_expenses_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
