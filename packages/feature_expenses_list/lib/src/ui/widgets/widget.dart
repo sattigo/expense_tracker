@@ -8,6 +8,7 @@ import 'package:feature_transaction_form/feature_transaction_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+@visibleForTesting
 class ExpenseListWidget extends StatelessWidget {
   const ExpenseListWidget({super.key});
 
