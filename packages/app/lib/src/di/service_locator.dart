@@ -1,4 +1,5 @@
 import 'package:app/src/di/core_event_bus_di.dart';
+import 'package:app/src/di/features/chart_di.dart';
 import 'package:app/src/di/features/expenses_di.dart';
 import 'package:app/src/di/features/transaction_form_di.dart';
 import 'package:app/src/di/router_di.dart';
@@ -19,4 +20,5 @@ Future<void> setupServiceLocator() async {
   await setupCoreEventBusDI();
   await setupExpensesDI();
   await setupTransactionFormDI();
+  await setupChartDI();
 }

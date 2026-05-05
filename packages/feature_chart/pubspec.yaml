@@ -1,5 +1,5 @@
-name: app
-description: Main application entry point
+name: feature_chart
+description: Expenses chart feature package
 version: 1.0.0
 publish_to: none
 
@@ -15,30 +15,26 @@ dependencies:
     path: ../core_event_bus
   core_expense_domain:
     path: ../core_expense_domain
+  core_failure:
+    path: ../core_failure
   core_l10n:
     path: ../core_l10n
   core_navigation:
     path: ../core_navigation
-  core_platform:
-    path: ../core_platform
-  feature_chart:
-    path: ../feature_chart
-  feature_expense_detail:
-    path: ../feature_expense_detail
-  feature_expenses_list:
-    path: ../feature_expenses_list
-  feature_home:
-    path: ../feature_home
-  feature_transaction_form:
-    path: ../feature_transaction_form
+  core_result:
+    path: ../core_result
+  fl_chart: "1.2.0"
   flutter:
     sdk: flutter
-  flutter_localizations:
-    sdk: flutter
+  flutter_bloc: "9.1.1"
+  freezed_annotation: "3.1.0"
   get_it: "8.0.3"
-  shared_preferences: "2.3.5"
+  intl: "0.20.2"
 
 dev_dependencies:
+  build_runner: "2.14.1"
   flutter_lints: "6.0.0"
   flutter_test:
     sdk: flutter
+  freezed: "3.2.5"
+  mocktail: "1.0.4"

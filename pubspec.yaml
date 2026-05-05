@@ -17,8 +17,10 @@ workspace:
   - packages/core_navigation
   - packages/core_platform
   - packages/core_result
+  - packages/feature_chart
   - packages/feature_expense_detail
   - packages/feature_expenses_list
+  - packages/feature_home
   - packages/feature_transaction_form
 
 dependencies:
