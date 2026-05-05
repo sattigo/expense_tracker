@@ -8,6 +8,7 @@ import 'package:feature_transaction_form/feature_transaction_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+@visibleForTesting
 class ExpenseListWidget extends StatelessWidget {
   const ExpenseListWidget({super.key});
 
@@ -17,31 +18,65 @@ class ExpenseListWidget extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.appTitle), elevation: 2),
-      body: BlocBuilder<ExpenseListBloc, ExpenseListState>(
-        buildWhen: (previous, current) => previous != current,
-        builder: (context, state) {
-          return state.when(
-            initial: () => Center(child: Text(l10n.noExpensesYet)),
-            loading: () => const Center(child: CircularProgressIndicator()),
-            loaded: (expenses) => expenses.isEmpty
-                ? Center(child: Text(l10n.noExpensesYetAddFirst))
-                : ListView.builder(
-                    itemCount: expenses.length,
-                    itemBuilder: (context, index) {
-                      final expense = expenses[index];
-                      return _ExpenseListItem(expense: expense);
-                    },
+      body: Column(
+        children: [
+          Expanded(
+            child: BlocBuilder<ExpenseListBloc, ExpenseListState>(
+              buildWhen: (previous, current) => previous != current,
+              builder: (context, state) {
+                return state.when(
+                  initial: () => Center(child: Text(l10n.noExpensesYet)),
+                  loading: () => const Center(child: CircularProgressIndicator()),
+                  loaded: (expenses) => expenses.isEmpty
+                      ? Center(child: Text(l10n.noExpensesYetAddFirst))
+                      : ListView.builder(
+                          itemCount: expenses.length,
+                          itemBuilder: (context, index) {
+                            final expense = expenses[index];
+                            return _ExpenseListItem(expense: expense);
+                          },
+                        ),
+                  error: (message) => _ErrorView(
+                    message: message,
+                    onRetry: () => context.read<ExpenseListBloc>().add(const ExpenseListEvent.load()),
                   ),
-            error: (message) => _ErrorView(
-              message: message,
-              onRetry: () => context.read<ExpenseListBloc>().add(const ExpenseListEvent.load()),
+                );
+              },
             ),
-          );
-        },
+          ),
+          _AddItemButton(onPressed: () => showTransactionForm(context)),
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => showTransactionForm(context),
-        child: const Icon(Icons.add),
+    );
+  }
+}
+
+class _AddItemButton extends StatelessWidget {
+  const _AddItemButton({required VoidCallback onPressed}) : _onPressed = onPressed;
+
+  final VoidCallback _onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = S.of(context)!;
+    final bottomInset = MediaQuery.of(context).viewPadding.bottom;
+
+    return Padding(
+      padding: EdgeInsets.fromLTRB(16, 8, 16, 8 + bottomInset),
+      child: SizedBox(
+        width: double.infinity,
+        child: TextButton(
+          onPressed: _onPressed,
+          style: TextButton.styleFrom(
+            backgroundColor: Theme.of(context).colorScheme.outline,
+            foregroundColor: Theme.of(context).colorScheme.surface,
+            shape: const RoundedRectangleBorder(),
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            minimumSize: Size.zero,
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          ),
+          child: Text(l10n.addItem),
+        ),
       ),
     );
   }

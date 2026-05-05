@@ -29,5 +29,6 @@
   "categoryOther": "Другое",
   "chartNoExpensesYet": "Трат нет",
   "homeTabList": "Список",
-  "homeTabChart": "График"
+  "homeTabChart": "График",
+  "addItem": "Добавить позицию"
 }
