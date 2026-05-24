@@ -46,6 +46,7 @@ class _TransactionFormWidgetState extends State<TransactionFormWidget> {
               Text(l10n.addTransaction, style: Theme.of(context).textTheme.headlineSmall, textAlign: TextAlign.center),
               const SizedBox(height: 24),
               TextFormField(
+                key: const Key('titleField'),
                 controller: _titleController,
                 decoration: InputDecoration(labelText: l10n.title, border: const OutlineInputBorder()),
                 validator: (value) {
@@ -57,6 +58,7 @@ class _TransactionFormWidgetState extends State<TransactionFormWidget> {
               ),
               const SizedBox(height: 16),
               TextFormField(
+                key: const Key('amountField'),
                 controller: _amountController,
                 decoration: InputDecoration(
                   labelText: l10n.amount,
@@ -76,6 +78,7 @@ class _TransactionFormWidgetState extends State<TransactionFormWidget> {
               ),
               const SizedBox(height: 16),
               DropdownButtonFormField<ExpenseType>(
+                key: const Key('dropdownTypeField'),
                 initialValue: _selectedType,
                 decoration: InputDecoration(labelText: l10n.type, border: const OutlineInputBorder()),
                 items: ExpenseType.values.map((type) {
@@ -89,6 +92,7 @@ class _TransactionFormWidgetState extends State<TransactionFormWidget> {
               ),
               const SizedBox(height: 16),
               DropdownButtonFormField<ExpenseCategory>(
+                key: const Key('dropdownCategoryField'),
                 initialValue: _selectedCategory,
                 decoration: InputDecoration(labelText: l10n.category, border: const OutlineInputBorder()),
                 items: ExpenseCategory.values.map((category) {
