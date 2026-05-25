@@ -128,6 +128,7 @@ class _TransactionFormWidgetState extends State<TransactionFormWidget> {
                 builder: (context, state) {
                   final isSubmitting = state.maybeWhen(submitting: () => true, orElse: () => false);
                   return ElevatedButton(
+                    key: const Key('saveButton'),
                     onPressed: isSubmitting ? null : _onSave,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16),
