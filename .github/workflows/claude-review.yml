@@ -1,0 +1,80 @@
+name: Claude AI Code Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  claude-review:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get PR diff
+        run: |
+          git fetch origin ${{ github.base_ref }}
+          git diff origin/${{ github.base_ref }}...HEAD -- '*.dart' '*.yaml' '*.json' | head -c 50000 > /tmp/diff.txt
+
+      - name: Run Claude Code Review
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+        run: |
+          python3 - <<'PYEOF'
+          import json, os, urllib.request
+
+          rules = open('.github/CLAUDE_REVIEW_RULES.md').read()
+          diff = open('/tmp/diff.txt').read()
+          pr_title = os.environ.get('PR_TITLE', '')
+          pr_author = os.environ.get('PR_AUTHOR', '')
+
+          user_msg = f"Выполни код-ревью PR.\n\nНазвание: {pr_title}\nАвтор: {pr_author}\n\nDiff:\n{diff}"
+
+          payload = json.dumps({
+              'model': 'claude-sonnet-4-5',
+              'max_tokens': 4096,
+              'system': rules,
+              'messages': [{'role': 'user', 'content': user_msg}]
+          }).encode()
+
+          req = urllib.request.Request(
+              'https://api.anthropic.com/v1/messages',
+              data=payload,
+              headers={
+                  'x-api-key': os.environ['ANTHROPIC_API_KEY'],
+                  'anthropic-version': '2023-06-01',
+                  'content-type': 'application/json'
+              }
+          )
+
+          with urllib.request.urlopen(req) as resp:
+              data = json.loads(resp.read())
+
+          text = next((b['text'] for b in data.get('content', []) if b.get('type') == 'text'), 'No review generated')
+
+          with open('/tmp/review.txt', 'w') as f:
+              f.write(text)
+          PYEOF
+
+      - name: Post review comment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const review = fs.readFileSync('/tmp/review.txt', 'utf8');
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `## 🤖 Claude AI Code Review\n\n${review}\n\n---\n*Автоматическое ревью. Модель: claude-sonnet-4-5*`
+            });
