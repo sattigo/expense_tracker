@@ -1,4 +1,4 @@
-name: expense_tracker
+name: expense_tracker 
 description: "Expense Tracker - Clean Architecture Demo"
 publish_to: 'none'
 version: 1.0.0+1
