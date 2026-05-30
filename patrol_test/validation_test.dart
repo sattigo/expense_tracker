@@ -12,12 +12,13 @@ void main() {
       ($)async {
       await openAddTransactionScreen($);
 
-      expect($('Add Transaction'), findsOneWidget);
+      expect($(const Key(TransactionFormKeys.titleField)), findsOneWidget);
 
-      await $('Save').tap();
+      await $(const Key(TransactionFormKeys.saveButton)).tap();
       await $.pumpAndTrySettle();
 
       expect($('Please enter a title'), findsOneWidget);
+      expect($('Add Transaction'), findsOneWidget);
 
       }
   );

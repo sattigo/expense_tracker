@@ -10,8 +10,7 @@ void main() {
   patrolTest(
     'app opens successfully',
         ($) async {
-      WidgetsFlutterBinding.ensureInitialized();
-      await setupServiceLocator();
+      await launchApp($);
 
       await $.pumpWidgetAndSettle(const ExpenseTrackerApp());
 

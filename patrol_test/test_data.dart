@@ -1,4 +1,4 @@
-//набор тестовых данных
+//test data set
 
 
 class TestData {
