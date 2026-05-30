@@ -12,8 +12,6 @@ void main() {
         ($) async {
       await launchApp($);
 
-      await $.pumpWidgetAndSettle(const ExpenseTrackerApp());
-
       expect($('Expense Tracker'), findsOneWidget);
       expect($('Add item'), findsOneWidget);
       expect($('List'), findsOneWidget);
