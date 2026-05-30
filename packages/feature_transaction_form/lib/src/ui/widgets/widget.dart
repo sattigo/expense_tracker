@@ -6,6 +6,7 @@ import 'package:feature_transaction_form/src/ui/utils/date_formatter.dart';
 import 'package:feature_transaction_form/src/ui/utils/type_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:feature_transaction_form/src/ui/widget_constants.dart';
 
 class TransactionFormWidget extends StatefulWidget {
   const TransactionFormWidget({super.key});
@@ -46,7 +47,7 @@ class _TransactionFormWidgetState extends State<TransactionFormWidget> {
               Text(l10n.addTransaction, style: Theme.of(context).textTheme.headlineSmall, textAlign: TextAlign.center),
               const SizedBox(height: 24),
               TextFormField(
-                key: const Key('titleField'),
+                key: const Key(TransactionFormKeys.titleField),
                 controller: _titleController,
                 decoration: InputDecoration(labelText: l10n.title, border: const OutlineInputBorder()),
                 validator: (value) {
@@ -58,7 +59,7 @@ class _TransactionFormWidgetState extends State<TransactionFormWidget> {
               ),
               const SizedBox(height: 16),
               TextFormField(
-                key: const Key('amountField'),
+                key: const Key(TransactionFormKeys.amountField),
                 controller: _amountController,
                 decoration: InputDecoration(
                   labelText: l10n.amount,
@@ -78,7 +79,7 @@ class _TransactionFormWidgetState extends State<TransactionFormWidget> {
               ),
               const SizedBox(height: 16),
               DropdownButtonFormField<ExpenseType>(
-                key: const Key('dropdownTypeField'),
+                key: const Key(TransactionFormKeys.dropdownTypeField),
                 initialValue: _selectedType,
                 decoration: InputDecoration(labelText: l10n.type, border: const OutlineInputBorder()),
                 items: ExpenseType.values.map((type) {
@@ -92,7 +93,7 @@ class _TransactionFormWidgetState extends State<TransactionFormWidget> {
               ),
               const SizedBox(height: 16),
               DropdownButtonFormField<ExpenseCategory>(
-                key: const Key('dropdownCategoryField'),
+                key: const Key(TransactionFormKeys.dropdownCategoryField),
                 initialValue: _selectedCategory,
                 decoration: InputDecoration(labelText: l10n.category, border: const OutlineInputBorder()),
                 items: ExpenseCategory.values.map((category) {
@@ -128,7 +129,7 @@ class _TransactionFormWidgetState extends State<TransactionFormWidget> {
                 builder: (context, state) {
                   final isSubmitting = state.maybeWhen(submitting: () => true, orElse: () => false);
                   return ElevatedButton(
-                    key: const Key('saveButton'),
+                    key: const Key(TransactionFormKeys.saveButton),
                     onPressed: isSubmitting ? null : _onSave,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16),

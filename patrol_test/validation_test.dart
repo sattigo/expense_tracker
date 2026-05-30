@@ -3,18 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:patrol/patrol.dart';
 import 'test_data.dart';
+import 'helpers.dart';
+import 'package:feature_transaction_form/src/ui/widget_constants.dart';
 
 void main() {
   patrolTest(
     'Save by null title',
       ($)async {
-      WidgetsFlutterBinding.ensureInitialized();
-      await setupServiceLocator();
-
-      await $.pumpWidgetAndSettle(const ExpenseTrackerApp());
-
-      await $('Add item').tap();
-      await $.pumpAndTrySettle();
+      await openAddTransactionScreen($);
 
       expect($('Add Transaction'), findsOneWidget);
 
@@ -29,24 +25,17 @@ void main() {
   patrolTest(
       'Save by null amount',
       ($)async {
-      WidgetsFlutterBinding.ensureInitialized();
-      await setupServiceLocator();
-
-      await $.pumpWidgetAndSettle(const ExpenseTrackerApp());
-
-      await $('Add item').tap();
-      await $.pumpAndTrySettle();
+      await openAddTransactionScreen($);
 
       expect($('Add Transaction'), findsOneWidget);
 
-      await $(#titleField).tap();
-      await $(#titleField).enterText('I am text');
+      await enterTitle($, TestData.transactionTitle);
       await $.native.pressBack();
       await $.pumpAndTrySettle();
 
-      expect($('I am text'), findsOneWidget);
+      expect($(TestData.transactionTitle), findsOneWidget);
 
-      await $(#saveButton).tap();
+      await $(const Key(TransactionFormKeys.saveButton)).tap();
       await $.pumpAndTrySettle();
 
       expect($('Please enter an amount'), findsOneWidget);
@@ -57,25 +46,17 @@ void main() {
   patrolTest(
       'Max tittle length',
       ($)async{
-          WidgetsFlutterBinding.ensureInitialized();
-          await setupServiceLocator();
-
-          await $.pumpWidgetAndSettle(const ExpenseTrackerApp());
+          await openAddTransactionScreen($);
           
-          await $('Add item').tap();
-          await $.pumpAndTrySettle();
-          
-          await $(#titleField).tap();
-          await $(#titleField).enterText('Hello i am so big text for this title Hello i am so big text for this title');
+          await enterTitle($, 'Hello i am so big text for this title Hello i am so big text for this title');
+
+          await enterAmount($, TestData.amount);
+
+          await closeKeyboard($);
+
+          await $(const Key(TransactionFormKeys.saveButton)).tap();
           await $.pumpAndTrySettle();
 
-          await $(#amountField).tap();
-          await $(#amountField).enterText('40');
-          await $.native.pressBack();
-          await $.pumpAndTrySettle();
-
-          await $(#saveButton).tap();
-          await $.pumpAndTrySettle();
 
           expect($('Expense Tracker'), findsOneWidget);
 

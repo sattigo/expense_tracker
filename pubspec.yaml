@@ -37,7 +37,7 @@ dev_dependencies:
   ignorium: "1.0.0"
   lintorium: "311.0.0"
   melos: "7.5.1"
-  patrol: ^4.6.0
+  patrol: "4.6.0"
 
 flutter:
   uses-material-design: true
