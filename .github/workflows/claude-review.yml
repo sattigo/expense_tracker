@@ -23,6 +23,43 @@ jobs:
           git fetch origin ${{ github.base_ref }}
           git diff origin/${{ github.base_ref }}...HEAD -- '*.dart' '*.yaml' '*.json' | head -c 50000 > /tmp/diff.txt
 
+      - name: Fetch PR comment history
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          python3 - <<'PYEOF'
+          import urllib.request, json, os
+
+          token = os.environ['GH_TOKEN']
+          repo = os.environ['REPO']
+          pr_number = os.environ['PR_NUMBER']
+
+          req = urllib.request.Request(
+              f'https://api.github.com/repos/{repo}/issues/{pr_number}/comments?per_page=100',
+              headers={
+                  'Authorization': f'Bearer {token}',
+                  'Accept': 'application/vnd.github+json'
+              }
+          )
+
+          with urllib.request.urlopen(req) as resp:
+              comments = json.loads(resp.read())
+
+          history = []
+          for c in comments:
+              author = c['user']['login']
+              date = c['created_at'][:10]
+              body = c['body'].strip()
+              history.append(f"[{date}] @{author}:\n{body}")
+
+          result = "\n\n---\n\n".join(history) if history else "No previous comments."
+
+          with open('/tmp/pr_history.txt', 'w') as f:
+              f.write(result)
+          PYEOF
+
       - name: Run Claude Code Review
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -34,10 +71,18 @@ jobs:
 
           rules = open('.github/CLAUDE_REVIEW_RULES.md').read()
           diff = open('/tmp/diff.txt').read()
+          history = open('/tmp/pr_history.txt').read()
           pr_title = os.environ.get('PR_TITLE', '')
           pr_author = os.environ.get('PR_AUTHOR', '')
 
-          user_msg = f"Выполни код-ревью PR.\n\nНазвание: {pr_title}\nАвтор: {pr_author}\n\nDiff:\n{diff}"
+          user_msg = f"""PR Title: {pr_title}
+PR Author: {pr_author}
+
+## Previous review history for this PR
+{history}
+
+## Current diff to review
+{diff}"""
 
           payload = json.dumps({
               'model': 'claude-sonnet-4-5',
@@ -76,5 +121,5 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
-              body: `## 🤖 Claude AI Code Review\n\n${review}\n\n---\n*Автоматическое ревью. Модель: claude-sonnet-4-5*`
+              body: `## 🤖 Claude AI Code Review\n\n${review}\n\n---\n*Модель: claude-sonnet-4-5*`
             });
